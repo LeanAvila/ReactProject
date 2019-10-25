@@ -20,13 +20,6 @@ class HomePage extends React.Component {
                 <Content/>
                 <Users/>
                 <Footer/> 
-                <Router>
-                    <Switch>
-                            <Route exact path="/login" component={Login}/>
-                            <Route exact path="/signup" component={SignUp}/>
-                    </Switch>
-                </Router>
-                
             </div>
         )
     }

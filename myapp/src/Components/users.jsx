@@ -15,7 +15,7 @@ class Users extends React.Component {
                 <p><strong>want to build your own MYtinerary?</strong></p>  
                 </div>
                 <div className="text-center justify-content-center">
-                    <Router>
+                    
                         <div className="row">
                             <div className="col">
                                 <Link to="/login">Log In</Link>
@@ -24,7 +24,7 @@ class Users extends React.Component {
                                 <Link to="/signup">Create Account</Link>
                            </div>
                         </div>
-                    </Router>
+                    
                     
                 </div>
                 
