@@ -11,7 +11,6 @@ class Header extends React.Component {
     render () {
         return (
             <div>
-                <NavBar/>
                 <header>
                     <div className="row p-3">
                         <div className="col text-center">

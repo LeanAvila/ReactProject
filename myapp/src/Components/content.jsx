@@ -17,7 +17,7 @@ class Content extends React.Component {
                     </div>
                     
                 </div>
-                <div className="row">
+                <div className="row m-5">
                     <div className="col text-center">
                         <img src={Button} alt="boton-flecha" className="img-button"/>
                     </div>

@@ -7,7 +7,7 @@ class Title extends React.Component {
 
     render () {
         return (
-            <div className="text-center mr-auto">
+            <div className="text-center mx-auto  my-4">
                 <p>Find your perfect trip, designed by insiders who know and love their cities.</p>
             </div>
         )
