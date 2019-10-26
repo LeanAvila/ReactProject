@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/styles.css'
+import 'bootstrap/dist/css/bootstrap.css'
 class Title extends React.Component {
     constructor () {
         super ()
@@ -7,7 +7,7 @@ class Title extends React.Component {
 
     render () {
         return (
-            <div className="text-center margin">
+            <div className="text-center mr-auto">
                 <p>Find your perfect trip, designed by insiders who know and love their cities.</p>
             </div>
         )

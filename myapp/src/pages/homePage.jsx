@@ -7,6 +7,7 @@ import Content from '../Components/content'
 import Title from '../Components/title'
 import Login from './login'
 import SignUp from './signup'
+import Carousel from '../Components/carousel'
 class HomePage extends React.Component {
     constructor () {
         super () 
@@ -19,6 +20,7 @@ class HomePage extends React.Component {
                 <Title/>
                 <Content/>
                 <Users/>
+                <Carousel/>
                 <Footer/> 
             </div>
         )
