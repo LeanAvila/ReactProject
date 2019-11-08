@@ -1,7 +1,7 @@
 import React from 'react'
 import Button from './resources/button.png'
 import './styles/styles.css'
-
+import {Link} from 'react-router-dom'
 class Content extends React.Component {
     constructor () {
         super () 
@@ -19,7 +19,7 @@ class Content extends React.Component {
                 </div>
                 <div className="row m-5">
                     <div className="col text-center">
-                        <img src={Button} alt="boton-flecha" className="img-button"/>
+                        <Link to="/llamada"><img src={Button} alt="boton-flecha" className="img-button"/></Link>
                     </div>
                 </div>
                 
