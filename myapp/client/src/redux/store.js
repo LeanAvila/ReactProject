@@ -1,14 +1,11 @@
-import { createStore, combineReducers } from 'redux';
-import results from './reducers/results';
-import suggestions from './reducers/suggestions';
-import currentItem from './reducers/currentItem';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { composeWithDevTools  } from 'redux-devtools-extension';
+import rootReducer from '../redux/reducers/rootReducer';
+import thunk from 'redux-thunk'
 
-const reducer = combineReducers({
-    results,
-    suggestions,
-    currentItem,
-});
 
-const store = createStore(reducer);
+const middleware = [thunk];
 
-export default store;
+const store = createStore (rootReducer, undefined, composeWithDevTools(applyMiddleware(...middleware)));
+
+export default store; 
