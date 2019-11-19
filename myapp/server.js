@@ -2,8 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
 const cors = require('cors')
-const cities = require('./routes/api/cities')
-
+const cities = require('./routes/api/cities');
 const bodyParser = require('body-parser')
 
 const db = require('./config/keys').MongoURI;
@@ -48,4 +47,3 @@ app.listen (port, () => console.log (`server start on port ${port}`))
 // app.listen(3001, function () {
 //     console.log('servidor escuchando el puerto 3001');
 // })
-
