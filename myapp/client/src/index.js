@@ -4,7 +4,7 @@ import './index.css';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 import { Provider } from 'react-redux'
 import PageLogin from './pages/pageLogin'
-import Cities from './pages/cities'
+import Cities from './pages/cities/pageCities'
 import SignUp from './pages/signup'
 import HomePage from './pages/homePage';
 import Llamada from './Components/Llamada'
