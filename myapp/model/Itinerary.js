@@ -2,7 +2,7 @@ var mongoose = require('mongoose')
 
 var Schema = mongoose.Schema;
 
-var citySchema = new Schema({
+var itinerarySchema = new Schema({
     country: {
         type: String,
         required: true
@@ -13,4 +13,4 @@ var citySchema = new Schema({
     }
 })
 
-module.exports = cityModel = mongoose.model('cities', citySchema)
+module.exports = itineraryModel = mongoose.model('itineraries', itinerarySchema)

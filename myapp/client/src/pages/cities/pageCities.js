@@ -8,29 +8,31 @@ class Cities extends Component {
   constructor(props) {
     super(props)
     this.state = {
-        Cities: [],
-      filteredCities: []
+        cities: [],
+        filteredCities: []
     }
+    this.componentDidMount = this.componentDidMount.bind(this)
+    this.componentWillMount = this.componentWillMount.bind(this)
   }
   componentDidMount(){
     this.props.getCities();
+
   }
   componentWillMount() {
     this.setState({
-      Cities: this.props.item,
+      cities: this.props.item,
       filteredCities: this.props.item
     })
   }
 
   filterCities = (cityFilter) => {
-    let filteredCities = this.state.Cities
+    let filteredCities = this.state.cities
     const expresion = new RegExp (`^${cityFilter}`,'i')
+
     filteredCities = filteredCities.filter((city) => {
-      // let cityName = city.city.toLowerCase() + city.country.toLowerCase()
-      // return cityName.indexOf(
-      //   cityFilter.toLowerCase()) !== -1
       return expresion.test(city.city);
     })
+
     this.setState({
       filteredCities
     })
@@ -38,7 +40,7 @@ class Cities extends Component {
 
   render() {
     return (
-      <PageCities Cities={this.state.filteredCities} onChange={this.filterCities} />
+      <PageCities cities={this.state.filteredCities} onChange={this.filterCities} />
     )
   }
 }

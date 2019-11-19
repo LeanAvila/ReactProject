@@ -1,18 +1,25 @@
 
 import { GET_CITIES, ADD_CITY, DELETE_CITY } from '../actions/types'
 
-const defaultState = async () => {return await fetch('http://localhost:5000/api/cities')
-.then((resp) => {console.log(resp.json)})
-.catch((error) => console.log(error))
-}
-var result = defaultState();
+// export const getCities = () => async (dispatch) => {
+//     var data = await fetch('http://localhost:5000/api/cities').then((resp) => resp.json())
+//     dispatch({
+//         type: GET_CITIES,
+//         payload: data
+//     })
+// }
 
-export const getCities = () => {
-    console.log(result)
-    return {
+export const getCities = () => async (dispatch) => {
+    var urls = [
+        "http://localhost:5000/api/cities"
+    ]
+
+    var resp = await fetch(urls[0]).
+        then(res => res.json());
+    console.log(resp);
+    
+    dispatch({ 
         type: GET_CITIES,
-        payload: {
-            data: result            
-        }
-    }
+        payload: resp
+    })
 }

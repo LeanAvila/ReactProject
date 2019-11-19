@@ -9,7 +9,7 @@ export default function (state = [], action) {
 
     switch (action.type){
         case GET_CITIES: 
-        return [...state, action.payload.cities]
+        return state.push(...action.payload)
 
         default: 
         return state
