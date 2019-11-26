@@ -4,7 +4,7 @@ var app = express();
 const cors = require('cors')
 const cities = require('./routes/api/cities');
 const bodyParser = require('body-parser')
-
+const itinerary = require('./routes/api/itinerary')
 const db = require('./config/keys').MongoURI;
 
 app.use(bodyParser.json())
@@ -15,9 +15,11 @@ mongoose.connect(db)
 .then(() => console.log ('Mongo conected...'))
 .catch(err => console.log(err))
 
-
-
 app.use('/api/cities', cities)
+
+
+app.use('/api/itinerary', itinerary)
+
 
 const port = process.env.PORT || 5000
 
