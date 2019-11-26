@@ -1,6 +1,6 @@
 import React from 'react';
-import NavBar from '../../Components/navbar'
-import Header from '../../Components/header'
+import NavBar from '../../Components/navbar/navbar'
+import Header from '../../Components/header/header'
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
 
 class PageCities extends React.Component {

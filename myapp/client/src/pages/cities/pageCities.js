@@ -29,8 +29,9 @@ class Cities extends Component {
     let filteredCities = this.state.cities
     const expresion = new RegExp (`^${cityFilter}`,'i')
 
-    filteredCities = filteredCities.filter((city) => {
-      return expresion.test(city.city);
+    filteredCities = filteredCities.filter((cities) => {
+      var city = cities.city + ", " + cities.country
+      return expresion.test(city);
     })
 
     this.setState({

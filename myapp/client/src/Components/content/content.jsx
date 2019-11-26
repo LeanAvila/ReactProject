@@ -1,6 +1,6 @@
 import React from 'react'
-import Button from './resources/button.png'
-import './styles/styles.css'
+import Button from '../resources/button.png'
+import '../styles/styles.css'
 import {Link} from 'react-router-dom'
 class Content extends React.Component {
     constructor () {

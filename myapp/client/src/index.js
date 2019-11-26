@@ -7,8 +7,8 @@ import PageLogin from './pages/pageLogin'
 import Cities from './pages/cities/pageCities'
 import SignUp from './pages/signup'
 import HomePage from './pages/homePage';
-import Llamada from './Components/Llamada'
 import store from './redux/store'
+import Itinerary from './pages/itineary/itinerary';
 const Routes =
         <Provider
         store = {store}
@@ -18,8 +18,8 @@ const Routes =
                        <Route exact path="/" component={HomePage}/>
                        <Route exact path="/login" component={PageLogin}/>
                        <Route exact path="/signup" component={SignUp}/>
-                       <Route exact path="/llamada" component={Llamada}/>
                        <Route exact path="/cities" component={Cities}/>
+                       <Route exact path="/itinerary" component={Itinerary}/>
                </Switch>
            </Router>
        </Provider>

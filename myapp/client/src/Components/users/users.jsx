@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles/styles.css'
+import '../styles/styles.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import {BrowserRouter as Router,Link} from 'react-router-dom'
 

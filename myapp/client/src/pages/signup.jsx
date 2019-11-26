@@ -1,9 +1,9 @@
 import React from "react";
 import '../Components/styles/styles.css'
-import NavBar from '../Components/navbar'
-import CreateAccount from "../Components/createAccount";
-import Footer from "../Components/footer";
-import Header from "../Components/header"
+import NavBar from '../Components/navbar/navbar'
+import CreateAccount from "../Components/createAccount/createAccount";
+import Footer from "../Components/footer/footer";
+import Header from "../Components/header/header"
 const SignUp = () => {
   return (
       <div>
