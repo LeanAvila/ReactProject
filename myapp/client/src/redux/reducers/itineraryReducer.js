@@ -4,7 +4,10 @@ export default function (state = [], action) {
 
     switch (action.type){
         case GET_ITINERARY: 
-        return state.push(...action.payload)
+        return {
+            ...state,
+            cities: action.payload
+        }
 
         default: 
         return state

@@ -7,10 +7,6 @@ var itinerarySchema = new Schema({
         type: String,
         required: true
     },
-    profilePic: {
-        type: String,
-        required: true
-    },
     duration: {
         type: Number,
         required: true
@@ -19,14 +15,14 @@ var itinerarySchema = new Schema({
         type: Number,
         required: true
     },
+    likes: {
+        type: Number,
+        required: true
+    },
     hashtag: {
         type: Array,
         required: true
-    },
-    cityId: { 
-        type: Schema.ObjectId,
-        ref: "cities" 
-    } 
+    }
 })
 
 module.exports = itineraryModel = mongoose.model('itineraries', itinerarySchema)

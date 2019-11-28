@@ -1,5 +1,5 @@
 
-import { GET_ITINERARY} from '../actions/types'
+import { GET_ITINERARY } from '../actions/types'
 
 // export const getCities = () => async (dispatch) => {
 //     var data = await fetch('http://localhost:5000/api/cities').then((resp) => resp.json())
@@ -19,7 +19,7 @@ export const getItinerary = (id) => async (dispatch) => {
     console.log(resp);
     
     dispatch({ 
-        type: GET_CITIES,
+        type: GET_ITINERARY,
         payload: resp
     })
 }

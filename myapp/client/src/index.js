@@ -8,7 +8,7 @@ import Cities from './pages/cities/pageCities'
 import SignUp from './pages/signup'
 import HomePage from './pages/homePage';
 import store from './redux/store'
-import Itinerary from './pages/itineary/itinerary';
+import Itinerary from './pages/itineary/pageitinerary';
 const Routes =
         <Provider
         store = {store}
@@ -19,7 +19,7 @@ const Routes =
                        <Route exact path="/login" component={PageLogin}/>
                        <Route exact path="/signup" component={SignUp}/>
                        <Route exact path="/cities" component={Cities}/>
-                       <Route exact path="/itinerary" component={Itinerary}/>
+                       <Route exact path="/itinerary/:id" component={Itinerary}/>
                </Switch>
            </Router>
        </Provider>

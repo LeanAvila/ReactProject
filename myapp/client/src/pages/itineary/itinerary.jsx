@@ -6,15 +6,17 @@ class Itinerary extends Component {
     constructor (props){
         super (props) 
     }
+
     render() { 
+        console.log(this.props.itinerary.profilePic)
         return (
             <header>
                 <div className="container-fluid p-2">
                     
                     <div class="card bg-dark text-white">
-                        <img src={ImageBarcelona} className="img-fluid rounded shadow-lg" alt="Barcelona"/>
+                        <img src={this.props.itinerary.pic} className="img-fluid rounded shadow-lg" alt="Barcelona"/>
                         <div class="card-img-overlay p-4">
-                            <h1 class="card-text text-center m-5 ">Barcelona</h1>
+                            <h1 class="card-text text-center m-5 ">{this.props.itinerary.title}</h1>
                         </div>
                     </div>
                 </div>

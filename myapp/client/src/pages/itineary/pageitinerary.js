@@ -11,15 +11,15 @@ class PageItinerary extends Component {
         itinerary: []
     }
     this.componentDidMount = this.componentDidMount.bind(this)
-    this.componentWillMount = this.componentWillMount.bind(this)
+    // this.componentWillMount = this.componentWillMount.bind(this)
   }
-  componentDidMount(){
-    this.props.getItinerary();
+  async componentDidMount(){
+    let cityId = this.props.match.params.id;
+    await this.props.getItinerary(cityId);
+    console.log(this.props.item)
 
-  }
-  componentWillMount() {
     this.setState({
-      itinerary: this.props.item
+      itinerary: this.props.item.cities
     })
   }
 
@@ -29,8 +29,8 @@ class PageItinerary extends Component {
     )
   }
 }
-Cities.propTypes = {
-  getCities: PropTypes.func.isRequired,
+PageItinerary.propTypes = {
+  getItinerary: PropTypes.func.isRequired,
   item: PropTypes.array.isRequired
 }
 const mapStateToProps = (state) => ({

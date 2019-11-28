@@ -2,7 +2,7 @@ import React from 'react';
 import NavBar from '../../Components/navbar/navbar'
 import Header from '../../Components/header/header'
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
-
+import {Link} from 'react-router-dom'
 class PageCities extends React.Component {
     constructor (props) {
         super (props)
@@ -43,7 +43,13 @@ class PageCities extends React.Component {
                 <MDBContainer>
                     <ul>
                         {this.props.cities.map((item) =>{
-                            return <li key={item._id}>{item.city}, {item.country}</li>
+                            return <Link to={`/itinerary/${item._id}`}>
+                                
+                                <div className="container-fluid border shadow p-3 m-2 text-center">
+                                        {item.city}, {item.country}
+                                </div>
+                                
+                                </Link>
                         })}
                     </ul>
                 </MDBContainer>

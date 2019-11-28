@@ -10,6 +10,14 @@ var citySchema = new Schema({
     city: {
         type: String,
         required: true
+    },
+    pic: {
+        type: String,
+        required: true
+    },
+    itineraries: {
+        type: Schema.ObjectId,
+        ref: "itineraries"
     }
 })
 
