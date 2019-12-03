@@ -1,22 +1,26 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import Options from '../../Components/options/options'
-import ImageBarcelona from '../../Components/resources/barcelona.jpg'
 class Itinerary extends Component {
     constructor (props){
         super (props) 
     }
 
     render() { 
-        console.log(this.props.itinerary.profilePic)
+        let city = [...this.props.itinerary]
+        city = {...city[0]}
+        city = {...city.cityId}
+        
+        console.log(city.pic)
+
         return (
             <header>
                 <div className="container-fluid p-2">
                     
                     <div class="card bg-dark text-white">
-                        <img src={this.props.itinerary.pic} className="img-fluid rounded shadow-lg" alt="Barcelona"/>
-                        <div class="card-img-overlay p-4">
-                            <h1 class="card-text text-center m-5 ">{this.props.itinerary.title}</h1>
+                        <img src={city.pic} className="img-fluid rounded shadow-lg" alt={city.city}/>
+                        <div class="card-img-overlay">
+                            <h1 class="card-text text-center ">{city.city}</h1>
                         </div>
                     </div>
                 </div>

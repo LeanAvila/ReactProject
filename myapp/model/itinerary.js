@@ -22,6 +22,10 @@ var itinerarySchema = new Schema({
     hashtag: {
         type: Array,
         required: true
+    },
+    cityId: {
+        type: Schema.ObjectId,
+        ref: "cities"
     }
 })
 

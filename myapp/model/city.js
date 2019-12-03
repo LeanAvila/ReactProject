@@ -16,8 +16,8 @@ var citySchema = new Schema({
         required: true
     },
     itineraries: {
-        type: Schema.ObjectId,
-        ref: "itineraries"
+        type: Array,
+        required: true
     }
 })
 

@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
-import Barcelona from '../resources/barcelona.jpg'
+import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
+    MDBCardBody, MDBCardText } from "mdbreact";
+
 class Options extends Component {
     constructor (props){
         super(props)
+        this.state = {
+            id : 0
+        }
     }
     
     render() { 
@@ -37,18 +42,84 @@ class Options extends Component {
                     </div>
                     <div className="row">
                         <p >
-                            <a data-toggle="collapse" href="#collapseExample"  aria-expanded="false" aria-controls="collapseExample">
+                            <a data-toggle="collapse" href={`#collapseExample${this.state.id}`}  aria-expanded="false" aria-controls="collapseExample">
                                 View All
                             </a>
                         </p>
                         </div>
-                        <div class="collapse container-fluid" id="collapseExample">
+                        <div class="collapse container-fluid" id={`collapseExample${this.state.id}`}>
                             <div class="container-fluid ">
                                 <div className="row">
                                     <h5>Activities:</h5>
                                 </div>
                                 <div className="row">
-                                    
+                                <MDBContainer>
+                                    <MDBCarousel activeItem={1} length={3} slide={true} showControls={true} showIndicators={true} >
+                                        <MDBCarouselInner>
+                                        <MDBRow >
+                                            <MDBCarouselItem itemId="1">
+                                                <MDBRow >
+                                                    <MDBCol size="3" >
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                    <MDBCol size="3">
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                    <MDBCol size="3" >
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </MDBCarouselItem>
+
+
+                                            <MDBCarouselItem itemId="2">
+                                                <MDBRow>
+                                                    <MDBCol size="3">
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                    <MDBCol size="3">
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                    <MDBCol size="3" >
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </MDBCarouselItem>
+                                            <MDBCarouselItem itemId="3">
+                                            <MDBRow >
+                                                    <MDBCol size="3">
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                    <MDBCol size="3">
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                    <MDBCol size="3" >
+                                                        <MDBCard >
+                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
+                                                        </MDBCard>
+                                                    </MDBCol>
+                                                </MDBRow>
+                                            </MDBCarouselItem>
+                                        </MDBRow>
+                                        </MDBCarouselInner>
+                                    </MDBCarousel>
+                                    </MDBContainer>
                                 </div>
                             </div>  
                         </div>
