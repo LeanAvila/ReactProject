@@ -14,6 +14,7 @@ class Cities extends Component {
     this.componentDidMount = this.componentDidMount.bind(this)
     this.componentWillMount = this.componentWillMount.bind(this)
   }
+  
   async componentDidMount(){
     await this.props.getCities();
 

@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
-import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
-    MDBCardBody, MDBCardText } from "mdbreact";
-
+import Whirligig from 'react-whirligig'
+import './styles.css'
+import Activities from '../activities/pageActivities'
 class Options extends Component {
     constructor (props){
         super(props)
-        this.state = {
-            id : 0
-        }
     }
     
     render() { 
         console.log(this.props)
+        let whirligig
+        const next = () => whirligig.next()
+        const prev = () => whirligig.prev()
         return (
             <div >
-                {this.props.itinerary.map(item => (
+                {this.props.itinerary.map((item, index) => { 
+                    return (
                     <div className="container-fluid border shadow-sm rounded mb-2">
                     <div className="row">
                         <div className="col-4">
@@ -40,91 +41,65 @@ class Options extends Component {
                             </div>
                         </div>
                     </div>
-                    <div className="row">
-                        <p >
-                            <a data-toggle="collapse" href={`#collapseExample${this.state.id}`}  aria-expanded="false" aria-controls="collapseExample">
+                    <div className="row bg-light justify-content-center">
+                        <p>
+                            <a style={{textDecoration: 'none'},{color: 'black'}} data-toggle="collapse" href={`#collapseExample${index}`}  aria-expanded="false" aria-controls="collapseExample">
                                 View All
                             </a>
                         </p>
-                        </div>
-                        <div class="collapse container-fluid" id={`collapseExample${this.state.id}`}>
-                            <div class="container-fluid ">
-                                <div className="row">
-                                    <h5>Activities:</h5>
+                    </div>
+                    <div class="collapse container-fluid" id={`collapseExample${index}`}>
+                        <div class="container-fluid ">
+                                <h5>Activities:</h5>
+                                <div>
+                                    <Activities id ={item._id}/>
                                 </div>
-                                <div className="row">
-                                <MDBContainer>
-                                    <MDBCarousel activeItem={1} length={3} slide={true} showControls={true} showIndicators={true} >
-                                        <MDBCarouselInner>
-                                        <MDBRow >
-                                            <MDBCarouselItem itemId="1">
-                                                <MDBRow >
-                                                    <MDBCol size="3" >
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                    <MDBCol size="3">
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                    <MDBCol size="3" >
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                            </MDBCarouselItem>
-
-
-                                            <MDBCarouselItem itemId="2">
-                                                <MDBRow>
-                                                    <MDBCol size="3">
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                    <MDBCol size="3">
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                    <MDBCol size="3" >
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                            </MDBCarouselItem>
-                                            <MDBCarouselItem itemId="3">
-                                            <MDBRow >
-                                                    <MDBCol size="3">
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                    <MDBCol size="3">
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                    <MDBCol size="3" >
-                                                        <MDBCard >
-                                                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                                                        </MDBCard>
-                                                    </MDBCol>
-                                                </MDBRow>
-                                            </MDBCarouselItem>
-                                        </MDBRow>
-                                        </MDBCarouselInner>
-                                    </MDBCarousel>
-                                    </MDBContainer>
-                                </div>
+                                <Whirligig
+                                            visibleSlides={3}
+                                            gutter="1em"
+                                            ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
+                                        >   
+                                            <div class="card bg-dark">
+                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
+                                                <div class="card-img-overlay">
+                                                    <p class="card-title">Card</p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-dark">
+                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
+                                                <div class="card-img-overlay">
+                                                    <p class="card-title">Card</p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-dark">
+                                            <img className="img-fluid" src="http://www.fillmurray.com/500/300" />
+                                                <div class="card-img-overlay">
+                                                    <p class="card-title">Card</p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-dark">
+                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
+                                                <div class="card-img-overlay">
+                                                    <p class="card-title">Card</p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-dark">
+                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
+                                                <div class="card-img-overlay">
+                                                    <p class="card-title">Card</p>
+                                                </div>
+                                            </div>
+                                            <div class="card bg-dark">
+                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
+                                                <div class="card-img-overlay">
+                                                    <p class="card-title">Card title</p>
+                                                </div>
+                                            </div>
+                                        </Whirligig>
                             </div>  
                         </div>
                     </div>
-                ))}
+                )})}
             </div>
         );
     }

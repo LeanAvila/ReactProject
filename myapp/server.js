@@ -6,7 +6,7 @@ const cities = require('./routes/api/cities');
 const bodyParser = require('body-parser')
 const itinerary = require('./routes/api/itinerary')
 const db = require('./config/keys').MongoURI;
-
+const activities = require('./routes/api/activities')
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -20,6 +20,8 @@ app.use('/api/cities', cities)
 
 app.use('/api/itinerary', itinerary)
 
+
+app.use('/api/activities', activities)
 
 const port = process.env.PORT || 5000
 
