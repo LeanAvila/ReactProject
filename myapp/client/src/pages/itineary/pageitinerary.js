@@ -10,8 +10,7 @@ class PageItinerary extends Component {
     this.state = {
         itinerary: []
     }
-    this.componentDidMount = this.componentDidMount.bind(this)
-    // this.componentWillMount = this.componentWillMount.bind(this)
+    
   }
   async componentDidMount(){
     let cityId = this.props.match.params.id;
@@ -19,13 +18,14 @@ class PageItinerary extends Component {
     console.log(this.props.item)
 
     this.setState({
-      itinerary: this.props.item.cities
+      itinerary: this.props.item.itineraries
     })
   }
 
   render() {
     return (
-      <Itinerary itinerary = {this.state.itinerary}/>
+      this.props.item.flag?
+      <Itinerary itinerary = {this.state.itinerary}/>: null
     )
   }
 }

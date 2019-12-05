@@ -16,17 +16,16 @@ class PageActivities extends Component {
     // this.componentWillMount = this.componentWillMount.bind(this)
   }
   async componentDidMount(){
-      console.log(this.state)
+
     let itineraryId = this.props.id;
     await this.props.getActivities(itineraryId);
+    
     console.log(this.props.item)
+    
     this.setState({
         activities: this.props.item.activities,
         flag:this.props.item.flag
       })
-      console.log(this.state)
-
-
   }
 
   componentWillMount(){
@@ -34,7 +33,7 @@ class PageActivities extends Component {
   }
 
   render() {
-      console.log(this.props.item.activities,"jaiaam")
+      console.log(this.props.item.activities, "!")
      
     return (
        this.state.flag?

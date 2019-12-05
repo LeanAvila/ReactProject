@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Whirligig from 'react-whirligig'
-import {PropTypes} from 'prop-types'
-
+import './styles.css'
+import 'bootstrap/dist/css/bootstrap.css'
 
 export default class Activity extends Component {
     constructor (props){
@@ -12,7 +12,7 @@ export default class Activity extends Component {
        
     }
     componentDidMount(){
-        console.log(this.props,"pepe")
+        console.log(this.props.activities,"pepe")
     }
 
     render() {
@@ -26,55 +26,19 @@ export default class Activity extends Component {
                     visibleSlides={3}
                     gutter="1em"
                     ref={(_whirligigInstance) => { whirligig = _whirligigInstance}}
+                    className="mb-2"
                 >
-
-                    {this.state.activities.map(item => {
+                    {this.props.activities.map(item => {
                         return (
-                            <div class="card bg-dark">
-                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
-                                <div class="card-img-overlay">
-                                    <p class="card-title">{item.details[0].title}</p>
+                            <div class="card ">
+                                <img className="img-fluid border " src={item.pic} />
+                                <div class="card-img-overlay p-3 pt-5">
+                                    <p class="card-text text-white text-center m-3">{item.details}</p>
                                 </div>
                             </div>
                         )
                     })}
-                                            {/* <div class="card bg-dark">
-                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
-                                                <div class="card-img-overlay">
-                                                    <p class="card-title">Card</p>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark">
-                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
-                                                <div class="card-img-overlay">
-                                                    <p class="card-title">Card</p>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark">
-                                            <img className="img-fluid" src="http://www.fillmurray.com/500/300" />
-                                                <div class="card-img-overlay">
-                                                    <p class="card-title">Card</p>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark">
-                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
-                                                <div class="card-img-overlay">
-                                                    <p class="card-title">Card</p>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark">
-                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
-                                                <div class="card-img-overlay">
-                                                    <p class="card-title">Card</p>
-                                                </div>
-                                            </div>
-                                            <div class="card bg-dark">
-                                                <img className="img-fluid border" src="http://www.fillmurray.com/400/300" />
-                                                <div class="card-img-overlay">
-                                                    <p class="card-title">Card title</p>
-                                                </div>
-                                            </div> */}
-                                        </Whirligig>
+                </Whirligig>
             </div>
         )
     }

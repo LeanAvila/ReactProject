@@ -11,18 +11,15 @@ class Cities extends Component {
         cities: [],
         filteredCities: []
     }
-    this.componentDidMount = this.componentDidMount.bind(this)
-    this.componentWillMount = this.componentWillMount.bind(this)
+
   }
   
   async componentDidMount(){
     await this.props.getCities();
 
-  }
-  componentWillMount() {
     this.setState({
-      cities: this.props.item,
-      filteredCities: this.props.item
+      cities: this.props.item.cities,
+      filteredCities: this.props.item.cities
     })
   }
 
@@ -41,8 +38,11 @@ class Cities extends Component {
   }
 
   render() {
+    console.log(this.props);
+    
     return (
-      <PageCities cities={this.state.filteredCities} onChange={this.filterCities} />
+      this.props.item.flag?
+      <PageCities cities={this.state.filteredCities} onChange={this.filterCities} />:null
     )
   }
 }

@@ -1,12 +1,16 @@
 import { GET_ITINERARY } from '../actions/types'
-
-export default function (state = [], action) {
+const initialState={
+    itineraries:[],
+    flag:false
+}
+export default function (state = initialState, action) {
 
     switch (action.type){
         case GET_ITINERARY: 
         return {
             ...state,
-            cities: action.payload
+            itineraries: action.payload,
+            flag: true
         }
 
         default: 

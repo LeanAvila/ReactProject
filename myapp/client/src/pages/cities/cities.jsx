@@ -41,7 +41,6 @@ class PageCities extends React.Component {
                     </MDBRow>
                 </MDBContainer>
                 <MDBContainer>
-                    <ul>
                         {this.props.cities.map((item) =>{
                             return <Link to={`/itinerary/${item._id}`}>
                                 
@@ -51,7 +50,6 @@ class PageCities extends React.Component {
                                 
                                 </Link>
                         })}
-                    </ul>
                 </MDBContainer>
             </div>
 
