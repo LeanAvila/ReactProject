@@ -28,10 +28,10 @@ class PageCities extends React.Component {
                 <Header/> 
                 <MDBContainer >
                     <MDBRow md="12">
-                        <MDBCol md="6" className="offset-md-3">
+                        <MDBCol md="6" className="pl-3">
                             <form className="form-inline mt-4 mb-4" >
                                 <MDBIcon icon="search" />
-                                <input className="form-control form-control-sm ml-3 w-75" type="text" placeholder="Search" aria-label="Search" 
+                                <input className="form-control form-control col-10 ml-4" type="text" placeholder="Search" aria-label="Search" 
                                     id="filter" 
                                     value={this.state.cityFilter} 
                                     onChange={this.handleChange}
@@ -40,11 +40,11 @@ class PageCities extends React.Component {
                         </MDBCol>
                     </MDBRow>
                 </MDBContainer>
-                <MDBContainer>
+                <MDBContainer className="p-1">
                         {this.props.cities.map((item) =>{
                             return <Link to={`/itinerary/${item._id}`}>
                                 
-                                <div className="container-fluid border shadow p-3 m-2 text-center">
+                                <div className="container-fluid border shadow-sm pb-2 pt-2 mb-2 text-center">
                                         {item.city}, {item.country}
                                 </div>
                                 

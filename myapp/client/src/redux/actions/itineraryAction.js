@@ -13,7 +13,7 @@ export const getItinerary = (id) => async (dispatch) => {
     var urls = [
         "http://localhost:5000/api/itinerary/" + id
     ]
-
+    
     var resp = await fetch(urls[0]).
         then(res => res.json());
     console.log(resp);
