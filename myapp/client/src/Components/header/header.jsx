@@ -11,8 +11,8 @@ class Header extends React.Component {
         return (
             <div>
                 <header>
-                    <div className="row p-3">
-                        <div className="col text-center">
+                    <div className="row">
+                        <div className="col">
                             <img src={Logo} alt="logo" className="img-fluid"/>
                         </div>
                     </div>

@@ -1,157 +1,63 @@
 import React from "react";
-import { MDBCarousel, MDBCarouselInner, MDBCarouselItem, MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardImage,
-MDBCardBody, MDBCardText } from "mdbreact";
+import 'bootstrap/dist/css/bootstrap.css'
 
 const NavBar2 = () => {
   return (
-    <MDBContainer>
-      <MDBCarousel activeItem={1} length={3} slide={true} showControls={true} showIndicators={true} >
-        <MDBCarouselInner>
-          <MDBRow >
-            <MDBCarouselItem itemId="1">
-                <MDBRow >
-                    <MDBCol size="6" >
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                </MDBRow>
-                <MDBRow >
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                </MDBRow>
-            </MDBCarouselItem>
+    <div className="container-fluid mt-2 mb-2">
+        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
+            <div className="carousel-inner">
 
+                <div className="carousel-item active">
+                    <div className="container-fluid">
+                        <div className="row mb-4">
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg " alt="..."/></div>
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg " alt="..."/></div>
+                        </div>
+                        <div className="row ">
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                        </div>
+                    </div>
+                </div>
 
-            <MDBCarouselItem itemId="2">
-                <MDBRow>
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                </MDBRow>
-                <MDBRow >
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                </MDBRow>
-            </MDBCarouselItem>
-            <MDBCarouselItem itemId="3">
-            <MDBRow >
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(18).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                            Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                </MDBRow>
-                <MDBRow >
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                    <MDBCol size="6">
-                        <MDBCard className="mb-2">
-                        <MDBCardImage className="img-fluid" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" />
-                        <MDBCardBody>
-                            <MDBCardText>
-                                Some quick example text to build on the card title.
-                            </MDBCardText>
-                        </MDBCardBody>
-                        </MDBCard>
-                    </MDBCol>
-                </MDBRow>
-            </MDBCarouselItem>
-          </MDBRow>
-        </MDBCarouselInner>
-      </MDBCarousel>
-    </MDBContainer>
+                <div className="carousel-item">
+                <div className="container-fluid ">
+                        <div className="row mb-4">
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                        </div>
+                        <div className="row ">
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="carousel-item">
+                <div className="container-fluid ">
+                        <div className="row mb-4">
+                            <div className="col"><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                        </div>
+                        <div className="row">
+                            <div className="col"><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                            <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <a className="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span className="sr-only">Previous</span>
+            </a>
+            <a className="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                <span className="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+
   );
 }
 
