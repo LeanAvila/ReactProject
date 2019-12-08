@@ -8,11 +8,11 @@ class NavBar extends Component {
 render() {
   return (
         /*<!------------------ NavBar --------------------!>*/
-        <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-none">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
 
             {/*<!------------------ Icon Avatar with DropDown --------------------!>*/}
-            <a class=" text-muted" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i className="fas fa-user-circle fa-3x m-4"></i>
+            <a class="text-muted mr-3" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img  class="rounded-circle" src="https://picsum.photos/30/30" alt=""/>
             </a>
             <div class="dropdown-menu rounded ml-2" aria-labelledby="navbarDropdownMenuLink">
               <Link to="/signup"class="dropdown-item">Create account</Link>
@@ -21,7 +21,7 @@ render() {
 
             {/*<!------------------ Nav Toggler --------------------!>*/}
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon m-3"></span>
+              <span class="navbar-toggler-icon m-1"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarNavDropdown">

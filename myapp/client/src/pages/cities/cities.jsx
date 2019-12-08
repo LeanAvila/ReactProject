@@ -3,6 +3,7 @@ import NavBar from '../../Components/navbar/navbar'
 import Header from '../../Components/header/header'
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
 import {Link} from 'react-router-dom'
+import Footer from '../../Components/footer/footer'
 class PageCities extends React.Component {
     constructor (props) {
         super (props)
@@ -26,31 +27,29 @@ class PageCities extends React.Component {
             <div>
                 <NavBar/>
                 <Header/> 
-                <MDBContainer >
-                    <MDBRow md="12">
-                        <MDBCol md="6" className="pl-3">
-                            <form className="form-inline mt-4 mb-4" >
-                                <MDBIcon icon="search" />
-                                <input className="form-control form-control col-10 ml-4" type="text" placeholder="Search" aria-label="Search" 
+                <div className="container-fluid" >
+                    <div className="row my-3">
+                        <div className="col pl-3">
+                                <input className="form-control" type="text" placeholder="Search" aria-label="Search" 
                                     id="filter" 
                                     value={this.state.cityFilter} 
                                     onChange={this.handleChange}
                                 />
-                            </form>
-                        </MDBCol>
-                    </MDBRow>
-                </MDBContainer>
-                <MDBContainer className="p-1">
+                        </div>
+                    </div>
+                </div>
+                <div className="container-fluid p-1">
                         {this.props.cities.map((item) =>{
-                            return <Link to={`/itinerary/${item._id}`}>
+                            return <Link className="text-decoration-none" to={`/itinerary/${item._id}`}>
                                 
-                                <div className="container-fluid border shadow-sm pb-2 pt-2 mb-2 text-center">
+                                <div className="container-fluid border shadow-sm pb-2 pt-2 mb-2 text-center text-dark">
                                         {item.city}, {item.country}
                                 </div>
                                 
                                 </Link>
                         })}
-                </MDBContainer>
+                </div>
+                <Footer/>
             </div>
 
         )

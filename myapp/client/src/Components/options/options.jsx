@@ -11,7 +11,7 @@ class Options extends Component {
     }
     
     render() { 
-        console.log(this.props)
+        console.log(this.props, "options")
         let whirligig
         const next = () => whirligig.next()
         const prev = () => whirligig.prev()

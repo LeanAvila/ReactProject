@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import Options from '../../Components/options/options'
+import NavBar from '../../Components/navbar/navbar'
+import Footer from '../../Components/footer/footer'
 class Itinerary extends Component {
     constructor (props){
         super (props) 
@@ -13,6 +15,8 @@ class Itinerary extends Component {
         
         return (
             <div>
+                <NavBar/>
+                {/*<-------------------------- Header Itinerary --------------------------> */}
                 <header>
                     <div className="container-fluid p-2">
                         <div class="card bg-dark text-white">
@@ -26,12 +30,17 @@ class Itinerary extends Component {
                         </div>
                     </div>
                 </header>
+
+                {/*<-------------------------- Content from Itinerary --------------------------> */}
                 <div className="container-fluid p-3">
                     <h4>Available MYtineraries:</h4>
                 </div>
+
                 <div className="container-fluid p-2">
                     <Options itinerary = {this.props.itinerary}/>
-                </div>    
+                </div> 
+
+                <Footer/>
             </div>
             
         )

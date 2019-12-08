@@ -12,16 +12,16 @@ export default class Activity extends Component {
        
     }
     componentDidMount(){
-        console.log(this.props.activities,"pepe")
+        console.log(this.props.activities,"asdfasdfsdafdsfa")
     }
 
     render() {
        
         let whirligig
-        const next = () => whirligig.next()
-        const prev = () => whirligig.prev()
+        
         return (
             <div>
+
                 <Whirligig
                     visibleSlides={3}
                     gutter="1em"

@@ -12,8 +12,6 @@ class PageActivities extends Component {
         activities: [],
         flag:false
     }
-    
-    // this.componentWillMount = this.componentWillMount.bind(this)
   }
   async componentDidMount(){
 

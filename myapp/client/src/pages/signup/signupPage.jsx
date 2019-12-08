@@ -1,9 +1,8 @@
 import React from "react";
-import '../Components/styles/styles.css'
-import NavBar from '../Components/navbar/navbar'
-import Footer from "../Components/footer/footer";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import NavBar from '../../Components/navbar/navbar'
+import Footer from "../../Components/footer/footer";
 import 'bootstrap/dist/css/bootstrap.css'
+
 class SignUp extends React.Component {
 
   constructor (props){
