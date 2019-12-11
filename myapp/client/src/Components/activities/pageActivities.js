@@ -14,11 +14,11 @@ class PageActivities extends Component {
     }
   }
   async componentDidMount(){
-
+    
     let itineraryId = this.props.id;
     await this.props.getActivities(itineraryId);
     
-    console.log(this.props.item)
+    console.log(this.props.item, 'item from activities')
     
     this.setState({
         activities: this.props.item.activities,
@@ -26,13 +26,7 @@ class PageActivities extends Component {
       })
   }
 
-  componentWillMount(){
-    
-  }
-
   render() {
-      console.log(this.props.item.activities, "!")
-     
     return (
        this.state.flag?
       <Activities activities = {this.props.item.activities}/>:null

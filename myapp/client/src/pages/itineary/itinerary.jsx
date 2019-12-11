@@ -15,31 +15,29 @@ class Itinerary extends Component {
         
         return (
             <div>
-                <NavBar/>
-                {/*<-------------------------- Header Itinerary --------------------------> */}
-                <header>
-                    <div className="container-fluid p-2">
-                        <div class="card bg-dark text-white">
-                            <img src={city.pic} className="img-fluid rounded shadow-lg" alt={city.city}/>
-                            <div class="card-img-overlay ">
-                                <div className="d-flex justify-content-center">
-                                    <h1 class="card-text">{city.city}</h1>
+                    {/*<-------------------------- Header Itinerary --------------------------> */}
+                    <header>
+                        <div className="container-fluid p-2">
+                            <div class="card bg-dark text-white">
+
+                                <img src={city.pic} className="img-fluid rounded shadow-lg" alt={city.city}/>
+                                <div class="card-img-overlay ">
+                                    <div className="d-flex justify-content-center">
+                                        <h1 class="card-text">{city.city}</h1>
+                                    </div>
                                 </div>
-                                
                             </div>
                         </div>
+                    </header>
+
+                    {/*<-------------------------- Content from Itinerary --------------------------> */}
+                    <div className="container-fluid p-3">
+                        <h4>Available MYtineraries:</h4>
                     </div>
-                </header>
 
-                {/*<-------------------------- Content from Itinerary --------------------------> */}
-                <div className="container-fluid p-3">
-                    <h4>Available MYtineraries:</h4>
-                </div>
-
-                <div className="container-fluid p-2">
-                    <Options itinerary = {this.props.itinerary}/>
-                </div> 
-
+                    <div className="container-fluid p-2" id="container">
+                        <Options itinerary = {this.props.itinerary}/>
+                    </div>
                 <Footer/>
             </div>
             

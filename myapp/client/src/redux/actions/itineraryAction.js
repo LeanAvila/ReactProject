@@ -11,7 +11,7 @@ import { GET_ITINERARY } from '../actions/types'
 
 export const getItinerary = (id) => async (dispatch) => {
     var urls = [
-        "http://localhost:5000/api/itinerary/" + id
+        "http://localhost:5000/itineraries/" + id
     ]
     
     var resp = await fetch(urls[0]).

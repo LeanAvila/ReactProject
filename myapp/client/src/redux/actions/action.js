@@ -1,5 +1,5 @@
 
-import { GET_CITIES, ADD_CITY, DELETE_CITY } from '../actions/types'
+import { GET_CITIES} from '../actions/types'
 
 // export const getCities = () => async (dispatch) => {
 //     var data = await fetch('http://localhost:5000/api/cities').then((resp) => resp.json())
@@ -11,7 +11,7 @@ import { GET_CITIES, ADD_CITY, DELETE_CITY } from '../actions/types'
 
 export const getCities = () => async (dispatch) => {
     var urls = [
-        "http://localhost:5000/api/cities"
+        "http://localhost:5000/cities/all"
     ]
 
     var resp = await fetch(urls[0]).

@@ -24,12 +24,12 @@ class HomePage extends React.Component {
 
                     {/* <------------------------- Search Button ---------------------------> */}
                     <div className="my-3">
-                        <div className="border-x rounded-lg border-top border-bottom">
+                        <div className="border-top border-bottom">
                             <div className="card-title text-center">
                                 <h4 className="text-dark mt-3">Start browsing</h4>
                             </div>
                             <div className="card-text text-center mb-3">
-                                <Link to="/cities"><i class="fas fa-arrow-circle-right text-dark fa-7x rounded-circle shadow-sm img-thumbnail"></i></Link>
+                                <Link to="/cities"><i className="fas fa-arrow-circle-right text-dark fa-7x rounded-circle shadow-sm img-thumbnail"></i></Link>
                             </div>
                         </div>
                     </div>
@@ -38,10 +38,10 @@ class HomePage extends React.Component {
                     {/* <--------------------------- Carousel -----------------------------> */}
                     <div id="carousel" className="carousel slide" data-ride="carousel">
             
-                        {/* <ol class="carousel-indicators mb-0">
-                            <li data-target="#carousel" data-slide-to="0" class="active bg-dark"></li>
-                            <li data-target="#carousel" data-slide-to="1" class="bg-dark "></li>
-                            <li data-target="#carousel" data-slide-to="2" class="bg-dark "></li>
+                        {/* <ol className="carousel-indicators mb-0">
+                            <li data-target="#carousel" data-slide-to="0" className="active bg-dark"></li>
+                            <li data-target="#carousel" data-slide-to="1" className="bg-dark "></li>
+                            <li data-target="#carousel" data-slide-to="2" className="bg-dark "></li>
                         </ol> */}
 
                         <div className="carousel-inner">

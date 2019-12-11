@@ -13,6 +13,11 @@ routes.get("/:id", (req, res) => {
         }); 
     })
 });
+
+routes.get ('/all', (req, res) => {
+    itineraryModel.find()
+    .then(itineraries => res.json(itineraries))
+})
 module.exports = routes
 
 

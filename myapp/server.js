@@ -2,11 +2,17 @@ var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
 const cors = require('cors')
-const cities = require('./routes/api/cities');
-const bodyParser = require('body-parser')
+
+const cities = require('./routes/api/cities')
+const users = require('./routes/api/user')
 const itinerary = require('./routes/api/itinerary')
-const db = require('./config/keys').MongoURI;
 const activities = require('./routes/api/activities')
+
+const bodyParser = require('body-parser')
+
+const db = require('./config/keys').MongoURI;
+
+
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -15,13 +21,14 @@ mongoose.connect(db)
 .then(() => console.log ('Mongo conected...'))
 .catch(err => console.log(err))
 
-app.use('/api/cities', cities)
+app.use('/cities', cities)
 
 
-app.use('/api/itinerary', itinerary)
+app.use('/itineraries', itinerary)
 
+app.use('/activities', activities)
 
-app.use('/api/activities', activities)
+app.use('/users', users)
 
 const port = process.env.PORT || 5000
 
