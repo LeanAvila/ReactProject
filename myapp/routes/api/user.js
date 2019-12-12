@@ -5,32 +5,51 @@ const routes = express.Router();
 const userModel = require('../../model/user')
 const User = moongose.model('users');
 const { check, body } = require('express-validator');
+const passport = require('passport')
 
-routes.get('/all', userController.index)
+routes.get(
+      "/",
+      passport.authenticate("jwt", { session: false }),
+      (req, res) => {
+      userModel
+      .findOne({ _id: req.user._id })
+      .then(user => {
+            res.json(user);
+      })
+      .catch(err => res.status(404).json({ error: "User does not exist!" }));
+      }
+)
+
+      .get('/all', userController.index)
 
       .post('/register', [
+
+            check('avatarPicture').not().isEmpty().isString(),
+
             body('userName').custom(value => {
                   if (value){
                         return userModel.find({userName: value}).then(user => {
                               if (user.length){
-                                    return Promise.reject('username already exist')
+                                    return Promise.reject('Username already exist')
                               }
                         })
                   }else {
-                        return Promise.reject('username is required')
+                        return Promise.reject('Username is required')
                   }
             }),
-            /* Se que existe la function "isLength({min: 5})" , "not().isEmpty()", pero quiero ser un poco mas especifico con los errores que quiero
-            mostrar, ya que si utilizo la forma mas simple, en caso de no agregar password, me salen 2 errores(el segundo sería la cantidad de caracteres
-            minimos requeridos), pero el principal sería que esta vacio, es por eso que si esta vacio me muestre un solo error y no los 2
-            */
+
             body('password').custom(value => {
+
+
                   if (value){
+                        
                         if (!value.length >= 5){
-                              return Promise.reject('the min required is 5 characters')
+                              throw new Error('The min required for password is 5 characters');
                         }
+                        
+                        return true;
                   }else{
-                        return Promise.reject('password is required')
+                        return Promise.reject('Password is required')
                   }
             }),
 
@@ -43,27 +62,35 @@ routes.get('/all', userController.index)
                             // Indicates the success of this synchronous custom validator
                             return true;
                   }else{
-                        return Promise.reject('confirm password is required')
+                        return Promise.reject('Confirm Password is required')
                   }
             }),
 
-            check('firstName', 'the password is required').not().isEmpty(),
+            check('firstName', 'First Name is required').not().isEmpty(),
 
             body('email').custom((value) => {
                   if (value){
                         return userModel.find({email: value}).then(user => {
                               if (user.length){
-                                    return Promise.reject('email already in use');
+                                    return Promise.reject('Email already in use');
                               }
                         })
                   }else{
-                        return Promise.reject('email is required');
+                        return Promise.reject('Email is required');
                   }
                   
             }),
 
-            check('lastName', 'the password is required').not().isEmpty(),
-            check('country', 'the country is required').not().isEmpty(),
+            check('lastName', 'Last Name is required').not().isEmpty(),
+            check('country', 'The Country is required').not().isEmpty()
+
           ], userController.create)
+
+          .post('/login', [
+
+            check('userName').not().isEmpty(),
+            check('password').not().isEmpty()
+
+          ], userController.login)
 
 module.exports = routes

@@ -11,7 +11,11 @@ const activities = require('./routes/api/activities')
 const bodyParser = require('body-parser')
 
 const db = require('./config/keys').MongoURI;
-
+const passport = require("passport");
+//passport middleware
+app.use(passport.initialize());
+//passport configuration
+require('./passport/passport.js')
 
 app.use(bodyParser.json())
 app.use(cors())
@@ -28,7 +32,7 @@ app.use('/itineraries', itinerary)
 
 app.use('/activities', activities)
 
-app.use('/users', users)
+app.use('/user', users)
 
 const port = process.env.PORT || 5000
 
