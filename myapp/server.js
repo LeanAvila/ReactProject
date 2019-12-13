@@ -1,42 +1,42 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var app = express();
-const cors = require('cors')
+const cors = require('cors');
 
-const cities = require('./routes/api/cities')
-const users = require('./routes/api/user')
-const itinerary = require('./routes/api/itinerary')
-const activities = require('./routes/api/activities')
+const cities = require('./routes/api/cities');
+const users = require('./routes/api/user');
+const itinerary = require('./routes/api/itinerary');
+const activities = require('./routes/api/activities');
 
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const db = require('./config/keys').MongoURI;
-const passport = require("passport");
+const passport = require('passport');
 //passport middleware
 app.use(passport.initialize());
 //passport configuration
-require('./passport/passport.js')
+require('./passport/passport.js');
+require('./passport/googlePassport.js');
 
-app.use(bodyParser.json())
-app.use(cors())
+app.use(bodyParser.json());
+app.use(cors());
 
+mongoose
+  .connect(db)
+  .then(() => console.log('Mongo conected...'))
+  .catch(err => console.log(err));
 
-mongoose.connect(db)
-.then(() => console.log ('Mongo conected...'))
-.catch(err => console.log(err))
+app.use('/cities', cities);
 
-app.use('/cities', cities)
+app.use('/itineraries', itinerary);
 
+app.use('/activities', activities);
 
-app.use('/itineraries', itinerary)
+app.use('/user', users);
 
-app.use('/activities', activities)
+const port = process.env.PORT || 5000;
 
-app.use('/user', users)
-
-const port = process.env.PORT || 5000
-
-app.listen (port, () => console.log (`server start on port ${port}`))
+app.listen(port, () => console.log(`server start on port ${port}`));
 
 // app.get('/cities/all', cors(), function (req, res) {
 //     cityModel.find(function (err, result) {
