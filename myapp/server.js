@@ -18,6 +18,16 @@ app.use(passport.initialize());
 require('./passport/passport.js');
 require('./passport/googlePassport.js');
 
+passport.serializeUser(function(user, done) {
+  console.log('I should have jack ')
+  done(null, user)
+})
+passport.deserializeUser(function(obj, done) {
+  console.log('I wont have jack shit')
+  done(null, obj)
+})
+
+
 app.use(bodyParser.json());
 app.use(cors());
 

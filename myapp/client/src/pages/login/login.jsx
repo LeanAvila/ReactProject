@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/userAction';
 import { PropTypes } from 'prop-types';
-import { Link } from 'react-router-dom';
+import { a } from 'react-router-dom';
 // funcion de validacion
 const validate = values => {
   const errors = {};
@@ -134,9 +134,10 @@ class Login extends React.Component {
           </form>
 
           <div className='container-fluid px-3'>
-            <Link
+            <a
               className='text-muted'
-              to='/api/users/google'
+              href="http://localhost:5000/user/auth/google"
+              target="_parent"
               alt='login with google'
             >
               <div className='row text-center border rounded-pill shadow-sm mb-2'>
@@ -146,11 +147,9 @@ class Login extends React.Component {
                   </i>
                 </div>
               </div>
-            </Link>
+            </a>
 
-            <Link
-              to='/api/users/facebook'
-              alt='login with facebook'
+            <div
               className='text-muted'
             >
               <div className='row text-center border rounded-pill shadow-sm'>
@@ -160,7 +159,7 @@ class Login extends React.Component {
                   </i>
                 </div>
               </div>
-            </Link>
+            </div>
           </div>
         </div>
 

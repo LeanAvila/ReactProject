@@ -5,6 +5,12 @@ const routes = express.Router();
 const userModel = require('../../model/user');
 const { check, body } = require('express-validator');
 const passport = require('passport');
+
+
+const jwt = require('jsonwebtoken');
+const config = require('../../config/keys');
+const options = { expiresIn: 2592000 };
+
 routes
   .post(
     '/auth',
@@ -21,14 +27,16 @@ routes
 
   .get(
     '/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
+    passport.authenticate('google', { session: false }),
     function(req, res) {
-      req.token;
-      // Successful authentication, redirect home.
-      res.redirect('/');
+      
+      if(req.authInfo.message){
+        res.cookie('token', req.user, { expires: new Date(Date.now() + 900000), httpOnly: true })
+        res.status(301).redirect('http://localhost:3000/')
+      }
     }
   )
-  .get('/auth/google', passport.authenticate('google', { scope: ['profile'] }))
+  .get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
   .get('/all', userController.index)
 
