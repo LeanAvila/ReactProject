@@ -1,12 +1,12 @@
 import React from "react";
-import NavBar from '../../Components/navbar/navbar'
+import NavBar from '../../Components/navbar/navbarPage'
 import Footer from "../../Components/footer/footer";
 import 'bootstrap/dist/css/bootstrap.css'
 import { connect } from 'react-redux'
 import { addUser } from '../../redux/actions/userAction'
 import {PropTypes} from 'prop-types'
 import addAvatarPicture from '../../Components/resources/addAvatarPicture.png'
-
+import queryString from 'query-string';
 // funcion de validacion
 const validate = values => {
   const errors = {}
@@ -46,6 +46,22 @@ class SignUp extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount(){
+    let params = queryString.parse(this.props.location.search)
+
+    console.log(params, 'parametros recibidos');
+
+    if (params){
+      this.setState({
+        firstName : params.firstName,
+        lastName : params.lastName,
+        avatarPicture : params.avatarPicture,
+        email : params.email
+      })
+    }
+  }
+
+
   handleChange({target}) {
     const { name } = target
     const value = target.type === 'checkbox' ? target.checked : target.value 
@@ -83,7 +99,7 @@ class SignUp extends React.Component {
           <div className="container-fluid text-center">
             <div className="text-center my-3"><h4>Create Account</h4> </div>
             {this.state.avatarPicture ? 
-              <img className="img-fluid rounded-circle bg-black shadow-sm img-thumbnail mb-2 mt-2" src={this.state.avatarPicture} alt="Add a pic"/>
+              <img className="img-fluid rounded-circle bg-black shadow-sm img-thumbnail mb-2 mt-2" src={this.state.avatarPicture} alt="Add a pic" style={{height: '150px'}}/>
             :
               <img className="img-fluid rounded-circle bg-black shadow-sm img-thumbnail mb-2 mt-2" src={addAvatarPicture} alt="Add a Avatar Picture"/>
             }
@@ -100,9 +116,9 @@ class SignUp extends React.Component {
                   <input type="text" className="form-control" name="userName" onChange={this.handleChange} placeholder="Username"/>
                   {this.state.errors.userName && <span className="text-danger">{this.state.errors.userName}</span>}
                 </div>
-                <div className="form-group col-md-12">
+                <div className="form-group col-md-12" >
                   <label  htmlFor="avatarPicture">Avatar Picture</label>
-                  <input type="text" className="form-control" name="avatarPicture" onBlur={this.handleChange} placeholder="Avatar Picture"/>
+                  <input type="text" className="form-control" name="avatarPicture" value={this.state.avatarPicture} onBlur={this.handleChange} placeholder="Avatar Picture" />
                   {this.state.errors.avatarPicture && <span className="text-danger">{this.state.errors.avatarPicture}</span>}
                 </div>
               </div>
@@ -123,18 +139,23 @@ class SignUp extends React.Component {
               <div className="form-row">
                 <div className="form-group col-md-6">
                   <label  htmlFor="email">Email</label>
-                  <input type="email" className="form-control" name="email" onChange={this.handleChange} placeholder="Email"/>
+                  {this.state.email?
+                  <input type="email" className="form-control" name="email" id="email" value={this.state.email} onChange={this.handleChange} placeholder="Email" disabled/>
+                  :
+                  <input type="email" className="form-control" name="email" value={this.state.email} onChange={this.handleChange} placeholder="Email"/>
+                  } 
+                  
                   {this.state.errors.email && <span className="text-danger">{this.state.errors.email}</span>}
                 </div>
                 <div className="form-group col-md-6">
                   <label  htmlFor="firstName">First Name</label>
-                  <input type="text" className="form-control" name="firstName" onChange={this.handleChange} placeholder="First Name"/>
+                  <input type="text" className="form-control" name="firstName" value={this.state.firstName} onChange={this.handleChange} placeholder="First Name"/>
                   {this.state.errors.firstName && <span className="text-danger">{this.state.errors.firstName}</span>}
                 </div>
 
                 <div className="form-group col-md-12">
                   <label htmlFor="lastName">Last Name</label>
-                  <input type="text" className="form-control" name="lastName" onChange={this.handleChange} placeholder="Last Name"/>
+                  <input type="text" className="form-control" name="lastName" value={this.state.lastName} onChange={this.handleChange} placeholder="Last Name"/>
                   {this.state.errors.lastName && <span className="text-danger">{this.state.errors.lastName}</span>}
                 </div>
               </div>

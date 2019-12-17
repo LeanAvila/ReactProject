@@ -2,14 +2,58 @@ import React from 'react';
 import Header from '../../Components/header/header'
 import Footer from '../../Components/footer/footer'
 import {Link} from 'react-router-dom'
-import NavBar from '../../Components/navbar/navbar'
+import NavBar from '../../Components/navbar/navbarPage'
 import 'bootstrap/dist/css/bootstrap.css'
+import { connect } from 'react-redux'
+import { getUserActive } from '../../redux/actions/userAction'
+
+import {PropTypes} from 'prop-types'
+
+export function detectCookie (name) {
+    let cookie = document.cookie.split(';')
+    
+    for (var i = 0; i<cookie.length; i++){
+        var oneCookie = cookie[i].split('=');
+  
+        if (oneCookie[0] == name){
+            return {
+                name : oneCookie[0],
+                content : oneCookie[1]
+            }
+        }
+    }
+    return false
+  }
+
 class HomePage extends React.Component {
-    constructor () {
-        super () 
+    constructor (props) {
+        super (props)
+        
+        this.state = {
+            user: {}
+        }
     }
 
+    async componentDidMount(){
+        console.log(this.props, 'props from homepage')
+        let existCookie = detectCookie('token')
+      
+      
+        console.log('cookie', existCookie)
+      
+        if (existCookie){
+            await this.props.getUserActive(existCookie.content)
+      
+            this.setState({
+                user : this.props.item.user
+            })
+        }
+      }
+
     render () {
+        console.log(this.props, "props")
+        console.log(this.state, "state");
+        
         return (
             <div>
                 <NavBar/>
@@ -105,5 +149,12 @@ class HomePage extends React.Component {
         )
     }
 }
-
-export default HomePage;
+HomePage.propTypes = {
+    getUserActive : PropTypes.func.isRequired,
+    item: PropTypes.object.isRequired
+  }
+  const mapStateToProps = (state) => ({
+    item: state.user
+  })
+  
+  export default connect(mapStateToProps, { getUserActive })(HomePage);

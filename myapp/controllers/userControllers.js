@@ -28,11 +28,24 @@ exports.create = (req, res) => {
     // return res.status(422).json(errors);
     return res.status(422).json({ errors: errors.array() });
   } else {
-    console.log(req.body);
-
     new userModel(req.body)
       .save()
-      .then(user => res.status(200).send({ user }))
+      .then((user) => {
+        let payload = {
+          _id: user._id,
+          userName: user.userName,
+          avatarPicture: user.avatarPicture
+        };
+
+        jwt.sign(payload, config.SECRET_TOKEN, options, (error, token) => {
+          if (error) {
+            res.status(500).send({ error });
+          } else {
+            res.cookie('token', token)
+            res.status(200).send({token})
+          }
+        });
+      })
       .catch(error => res.status(500).send({ error }));
   }
 };
@@ -62,7 +75,8 @@ exports.login = (req, res) => {
               if (error) {
                 res.status(500).send({ error });
               } else {
-                res.status(200).send({ token });
+                res.cookie('token', token)
+                res.status(200).send({token})
               }
             });
           } else {

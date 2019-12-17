@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var app = express();
 const cors = require('cors');
 
+const cookieParser = require('cookie-parser')
 const cities = require('./routes/api/cities');
 const users = require('./routes/api/user');
 const itinerary = require('./routes/api/itinerary');
@@ -29,6 +30,7 @@ passport.deserializeUser(function(obj, done) {
 
 
 app.use(bodyParser.json());
+app.use(cookieParser())
 app.use(cors());
 
 mongoose

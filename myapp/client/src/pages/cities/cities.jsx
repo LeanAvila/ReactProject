@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from '../../Components/navbar/navbar'
+import NavBar from '../../Components/navbar/navbarPage'
 import Header from '../../Components/header/header'
 import { MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdbreact';
 import {Link} from 'react-router-dom'
@@ -42,9 +42,18 @@ class PageCities extends React.Component {
                         {this.props.cities.map((item) =>{
                             return <Link className="text-decoration-none" to={`/itinerary/${item._id}`}>
                                 
-                                <div className="container-fluid border shadow-sm pb-2 pt-2 mb-2 text-center text-dark">
+                                <div className="container-fluid border shadow-sm pb-2 pt-2 mb-2 text-center text-dark overflow-hidden">
+                                    <div className="">
                                         {item.city}, {item.country}
+                                    </div>
                                 </div>
+
+                                {/* <div class="card bg-dark text-white overflow-hidden">
+                                    <img src={item.pic} class="card-img" alt={item.city}/>
+                                    <div class="card-img-overlay">
+                                        <h5 class="card-title text-center">Card title</h5>
+                                    </div>
+                                </div> */}
                                 
                                 </Link>
                         })}

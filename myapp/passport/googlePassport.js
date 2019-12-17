@@ -19,12 +19,9 @@ module.exports = passport.use(
     function(accessToken, refreshToken, profile, cb) {
       console.log(profile, "profile google");
       
-      userModel.findOne({email: profile._json.email}).then((user) => {
-        let userGoogle = profile._json
-        
-        if (!user){
-          cb(null, userGoogle, {message: false})
-        }else {
+      userModel.findOne({email: profile._json.email}).then(user => {
+        console.log(user, 'usuario')
+        if (user){
           let payload = {
             _id: user._id,
             userName: user.userName,
@@ -39,9 +36,9 @@ module.exports = passport.use(
               cb(null, token, {message: true})
             }
           });
+        }else {
+            cb(null, profile._json, {message: false})
         }
-
-
       })
     }
   )

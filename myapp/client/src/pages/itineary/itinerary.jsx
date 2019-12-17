@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import Options from '../../Components/options/options'
-import NavBar from '../../Components/navbar/navbar'
 import Footer from '../../Components/footer/footer'
 class Itinerary extends Component {
     constructor (props){

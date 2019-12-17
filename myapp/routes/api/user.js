@@ -5,11 +5,7 @@ const routes = express.Router();
 const userModel = require('../../model/user');
 const { check, body } = require('express-validator');
 const passport = require('passport');
-
-
-const jwt = require('jsonwebtoken');
-const config = require('../../config/keys');
-const options = { expiresIn: 2592000 };
+const url = require('url'); 
 
 routes
   .post(
@@ -31,8 +27,21 @@ routes
     function(req, res) {
       
       if(req.authInfo.message){
-        res.cookie('token', req.user, { expires: new Date(Date.now() + 900000), httpOnly: true })
-        res.status(301).redirect('http://localhost:3000/')
+        res.cookie('token', req.user)
+        res.status(301).redirect(`http://localhost:3000/home/${req.user}`)
+      }else {
+        console.log(req.user, 'usuario enviado por cb')
+
+        res.redirect(url.format({
+          pathname: 'http://localhost:3000/signup/',
+          query: {
+            userName :  `${req.user.sub}`,
+            firstName : req.user.given_name,
+            lastName: req.user.family_name,
+            email: req.user.email,
+            avatarPicture: req.user.picture
+          }
+        }))
       }
     }
   )

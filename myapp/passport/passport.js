@@ -4,6 +4,7 @@ const userModel = require('../model/user');
 const key = require('../config/keys');
 const passport = require('passport');
 const opts = {};
+
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = key.SECRET_TOKEN;
 
@@ -17,6 +18,5 @@ module.exports = passport.use(
         }
         return done(null, false);
       })
-      .catch(err => console.log(err));
   })
 );

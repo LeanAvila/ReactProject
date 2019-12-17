@@ -1,11 +1,11 @@
 import React from 'react';
-import NavBar from '../../Components/navbar/navbar';
+import NavBar from '../../Components/navbar/navbarPage';
 import Footer from '../../Components/footer/footer';
 import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/userAction';
 import { PropTypes } from 'prop-types';
-import { a } from 'react-router-dom';
+
 // funcion de validacion
 const validate = values => {
   const errors = {};
