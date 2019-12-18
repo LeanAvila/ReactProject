@@ -25,6 +25,14 @@ export function detectCookie (name) {
     return false
   }
 
+  function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+
+
 class HomePage extends React.Component {
     constructor (props) {
         super (props)
@@ -47,6 +55,9 @@ class HomePage extends React.Component {
             this.setState({
                 user : this.props.item.user
             })
+        }else if (this.props.match.params.token){
+            setCookie('token', this.props.match.params.token, 1);
+            window.location.reload()
         }
       }
 

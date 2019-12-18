@@ -5,8 +5,6 @@ import {PropTypes} from 'prop-types'
 import { Link } from 'react-router-dom'
 import { logOut, getUserActive } from '../../redux/actions/userAction'
 
-
-
 class NavBar extends Component {
 constructor(props){
   super(props)
@@ -42,7 +40,7 @@ render() {
         }
       <div className="dropdown-menu rounded ml-2" aria-labelledby="navbarDropdownMenuLink">
         {this.props.item.user.email ? 
-        <div onClick={async () => {await this.props.logOut()}} className="dropdown-item">Log Out</div> 
+        <div onClick={() => document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`} className="dropdown-item">Log Out</div> 
         :
         <div>
           <Link to="/signup"className="dropdown-item">Create account</Link>

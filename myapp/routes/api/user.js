@@ -32,10 +32,9 @@ routes
       }else {
         console.log(req.user, 'usuario enviado por cb')
 
-        res.redirect(url.format({
-          pathname: 'http://localhost:3000/signup/',
+        res.status(301).redirect(url.format({
+          pathname: 'http://localhost:3000/signup',
           query: {
-            userName :  `${req.user.sub}`,
             firstName : req.user.given_name,
             lastName: req.user.family_name,
             email: req.user.email,

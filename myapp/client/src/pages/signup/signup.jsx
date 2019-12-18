@@ -7,6 +7,9 @@ import { addUser } from '../../redux/actions/userAction'
 import {PropTypes} from 'prop-types'
 import addAvatarPicture from '../../Components/resources/addAvatarPicture.png'
 import queryString from 'query-string';
+
+
+
 // funcion de validacion
 const validate = values => {
   const errors = {}
