@@ -67,7 +67,7 @@ class Login extends React.Component {
     console.log(this.state.errors, 'render');
     return (
       <div>
-        <NavBar />
+        <NavBar location={this.props.location}/>
         <div className='container-fluid p-3'>
           <div className='text-center my-3'>
             <h4>Login</h4>{' '}

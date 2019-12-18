@@ -42,7 +42,7 @@ class Cities extends Component {
     
     return (
       this.props.item.flag?
-      <PageCities cities={this.state.filteredCities} onChange={this.filterCities} />:null
+      <PageCities cities={this.state.filteredCities} onChange={this.filterCities} location={this.props.location}/>:null
     )
   }
 }

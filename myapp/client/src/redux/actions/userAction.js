@@ -19,8 +19,13 @@ export const addUser = data => async dispatch => {
   });
   console.log(resp, 'adduser');
 
+  dispatch({
+    type: ADD_USER,
+    payload: resp
+  })
+
   if (resp.token){
-    window.location.href = `http://localhost:3000/home/${resp.token}`;
+    window.location.href = `http://localhost:3000/home/?token=${resp.token}`;
   }
 };
 
@@ -48,6 +53,8 @@ export const login = data => async dispatch => {
     type: LOGIN_USER,
     payload: resp
   });
+
+  window.location.href = `http://localhost:5000/?token=${resp.token}`
 };
 
 export const getUserActive = (token) => async (dispatch) => {

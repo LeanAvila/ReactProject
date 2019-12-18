@@ -6,31 +6,7 @@ import NavBar from '../../Components/navbar/navbarPage'
 import 'bootstrap/dist/css/bootstrap.css'
 import { connect } from 'react-redux'
 import { getUserActive } from '../../redux/actions/userAction'
-
 import {PropTypes} from 'prop-types'
-
-export function detectCookie (name) {
-    let cookie = document.cookie.split(';')
-    
-    for (var i = 0; i<cookie.length; i++){
-        var oneCookie = cookie[i].split('=');
-  
-        if (oneCookie[0] == name){
-            return {
-                name : oneCookie[0],
-                content : oneCookie[1]
-            }
-        }
-    }
-    return false
-  }
-
-  function setCookie(cname, cvalue, exdays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-  }
 
 
 class HomePage extends React.Component {
@@ -42,32 +18,13 @@ class HomePage extends React.Component {
         }
     }
 
-    async componentDidMount(){
-        console.log(this.props, 'props from homepage')
-        let existCookie = detectCookie('token')
-      
-      
-        console.log('cookie', existCookie)
-      
-        if (existCookie){
-            await this.props.getUserActive(existCookie.content)
-      
-            this.setState({
-                user : this.props.item.user
-            })
-        }else if (this.props.match.params.token){
-            setCookie('token', this.props.match.params.token, 1);
-            window.location.reload()
-        }
-      }
-
     render () {
         console.log(this.props, "props")
         console.log(this.state, "state");
         
         return (
             <div>
-                <NavBar/>
+                <NavBar location={this.props.location}/>
                 <div className="container-fluid p-3">
                     <Header/>
                     
@@ -90,6 +47,14 @@ class HomePage extends React.Component {
                     </div>
                     {/* </Search Button> */}
 
+                    <div className="container-fluid py-3 text-center">
+                        <div className="row">
+                            <div className="col text-dark">
+                                <h5>Popular Itineraries</h5>
+                            </div>
+                        </div>
+                        
+                    </div>
                     {/* <--------------------------- Carousel -----------------------------> */}
                     <div id="carousel" className="carousel slide" data-ride="carousel">
             

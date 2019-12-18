@@ -5,9 +5,11 @@ const routes = express.Router();
 const userModel = require('../../model/user');
 const { check, body } = require('express-validator');
 const passport = require('passport');
-const url = require('url'); 
+
 
 routes
+
+  //<---------------------------- Auth JWT ---------------------------------->
   .post(
     '/auth',
     passport.authenticate('jwt', { session: false }),
@@ -20,42 +22,23 @@ routes
         .catch(err => res.status(404).json({ error: 'User does not exist!' }));
     }
   )
-
+  
+  //<------------------------- Auth With Google ------------------------------->
   .get(
     '/auth/google/callback',
     passport.authenticate('google', { session: false }),
-    function(req, res) {
-      
-      if(req.authInfo.message){
-        res.cookie('token', req.user)
-        res.status(301).redirect(`http://localhost:3000/home/${req.user}`)
-      }else {
-        console.log(req.user, 'usuario enviado por cb')
-
-        res.status(301).redirect(url.format({
-          pathname: 'http://localhost:3000/signup',
-          query: {
-            firstName : req.user.given_name,
-            lastName: req.user.family_name,
-            email: req.user.email,
-            avatarPicture: req.user.picture
-          }
-        }))
-      }
-    }
+    userController.googleCallback
   )
+
   .get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
-  .get('/all', userController.index)
-
+  //<---------------------------- Register User ------------------------------>
   .post(
     '/register',
     [
-      check('avatarPicture')
-        .not()
-        .isEmpty()
-        .isString(),
-
+      check('avatarPicture').not().isEmpty().isString(),
+      
+      //verifico si el username "esta usado", "si contiene algun valor"
       body('userName').custom(value => {
         if (value) {
           return userModel.find({ userName: value }).then(user => {
@@ -68,6 +51,7 @@ routes
         }
       }),
 
+      //verifico si la password "minimo requerido de caracteres", "si contiene algun valor"
       body('password').custom(value => {
         if (value) {
           if (!value.length >= 5) {
@@ -80,6 +64,7 @@ routes
         }
       }),
 
+      //verifico si las contraseñas coinciden
       body('passwordConfirmation').custom((value, { req }) => {
         if (value) {
           if (value !== req.body.password) {
@@ -93,10 +78,10 @@ routes
         }
       }),
 
-      check('firstName', 'First Name is required')
-        .not()
-        .isEmpty(),
+      check('firstName', 'First Name is required').not().isEmpty(),
 
+
+      //verifico si el email "ya esta usado", "si tiene algun valor (requerido)"
       body('email').custom(value => {
         if (value) {
           return userModel.find({ email: value }).then(user => {
@@ -109,27 +94,28 @@ routes
         }
       }),
 
-      check('lastName', 'Last Name is required')
-        .not()
-        .isEmpty(),
-      check('country', 'The Country is required')
-        .not()
-        .isEmpty()
+      check('lastName', 'Last Name is required').not().isEmpty(),
+      check('country', 'The Country is required').not().isEmpty()
     ],
     userController.create
   )
 
+
+  //<------------------------------- Login User ------------------------------->
   .post(
     '/login',
     [
-      check('userName')
-        .not()
-        .isEmpty(),
-      check('password')
-        .not()
-        .isEmpty()
+      check('userName').not().isEmpty(),
+      check('password').not().isEmpty()
     ],
     userController.login
-  );
+  )
 
+  //<----------------------------- Favourites --------------------------------->
+  .get('/favourites/:user', (req, res) => {
+
+  })
+  .post('/favourites/:user/:id', (req, res) => {
+    
+  })
 module.exports = routes;

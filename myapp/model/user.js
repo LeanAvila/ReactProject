@@ -32,6 +32,9 @@ var userSchema = new Schema({
     type: String,
     required: true
   },
+  favourites:{
+    type: Array
+  },
   lastLoginDate: {
     type: Date,
     default: Date.now()
@@ -42,6 +45,8 @@ var userSchema = new Schema({
   }
 });
 
+
+//antes de realizar un save() en el modelo user, se cifra la password
 userSchema.pre('save', function(next) {
   let user = this;
   bcrypt.genSalt(10, function(err, salt) {

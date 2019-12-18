@@ -25,7 +25,7 @@ class PageCities extends React.Component {
         console.log( this.props )
         return (
             <div>
-                <NavBar/>
+                <NavBar location={this.props.location} />
                 <Header/> 
                 <div className="container-fluid" >
                     <div className="row my-3">

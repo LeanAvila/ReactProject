@@ -3,18 +3,53 @@ import 'bootstrap//dist/css/bootstrap.css'
 import { connect } from 'react-redux'
 import {PropTypes} from 'prop-types'
 import { Link } from 'react-router-dom'
-import { logOut, getUserActive } from '../../redux/actions/userAction'
+import { getUserActive } from '../../redux/actions/userAction'
+import queryString from 'query-string';
+
+
+
 
 class NavBar extends Component {
 constructor(props){
   super(props)
 
   this.state = {
-    user : {}
+    user : {},
+    token : ""
+  }
+
+}
+
+async componentDidMount(){
+  let params = queryString.parse(this.props.location.search)
+  let localStoreToken = localStorage.getItem('token');
+
+
+  if (localStoreToken){
+    
+    this.setState({
+      token: localStoreToken
+    })
+
+    await this.props.getUserActive(localStoreToken);
+  }else if (params){
+    //si existen parametros pregunto si existe token
+      if (params.token){
+        //si existe token en la url entonces lo guardo en el localStorage
+        localStorage.setItem('token', params.token)
+
+        this.setState({
+          token: params.token
+        })
+
+        //realizo el fetch para pedir los datos del usuario (para cargarlos en el navbar)
+        await this.props.getUserActive(params.token);
+      }
   }
 }
 
 render() {
+  
   console.log(this.props.item.user, 'props')
   return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
@@ -40,7 +75,7 @@ render() {
         }
       <div className="dropdown-menu rounded ml-2" aria-labelledby="navbarDropdownMenuLink">
         {this.props.item.user.email ? 
-        <div onClick={() => document.cookie = `token=; expires=Thu, 01 Jan 1970 00:00:01 GMT;`} className="dropdown-item">Log Out</div> 
+        <a href="http://localhost:3000/home" onClick={()=> localStorage.removeItem('token')} className="dropdown-item">Log Out</a> 
         :
         <div>
           <Link to="/signup"className="dropdown-item">Create account</Link>
@@ -76,10 +111,11 @@ render() {
 
 
 NavBar.propTypes = {
+  getUserActive : PropTypes.func.isRequired,
   item: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
   item: state.user
 })
 
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, {getUserActive})(NavBar);

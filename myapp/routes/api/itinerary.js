@@ -4,6 +4,8 @@ const itineraryModel = require('../../model/itinerary');
 const routes = express.Router();
 const Cities = moongose.model('cities');
 
+
+//<--------------------- Return Itineraries of a City ------------------------>
 routes.get("/:id", (req, res) => {
     let cityRequested = req.params.name;
     console.log(cityRequested)
@@ -14,10 +16,13 @@ routes.get("/:id", (req, res) => {
     })
 });
 
+
+//<------------------------ Return All itineraries ---------------------------->
 routes.get ('/all', (req, res) => {
     itineraryModel.find()
     .then(itineraries => res.json(itineraries))
 })
+
 module.exports = routes
 
 

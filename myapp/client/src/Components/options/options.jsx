@@ -12,9 +12,6 @@ class Options extends Component {
     
     render() { 
         console.log(this.props, "options")
-        let whirligig
-        const next = () => whirligig.next()
-        const prev = () => whirligig.prev()
         return (
             <div >
                 {
@@ -44,8 +41,11 @@ class Options extends Component {
                                     <div className="col-4 text-center">$ {item.price}</div>
                                 </div>
                                 <div className="row p-3">
-                                    <p>{item.hashtag.map(hashtag => ( <strong>{hashtag} </strong>))}</p>
+                                    <div className="col">
+                                        <p>{item.hashtag.map(hashtag => ( <strong>{hashtag} </strong>))}</p>
+                                    </div>
                                 </div>
+                                
                             </div>
                         </div>
                         <div className="row bg-light justify-content-center">
@@ -62,9 +62,17 @@ class Options extends Component {
                                     <Activities id={item._id}/>
                                 </div>
                             </div>
+                            
+                            <div className="row my-3">
+                                <div className="col text-center">
+                                    <button className="btn btn-danger rounded-pill" type="button"><i class="far fa-heart fa-1x"></i></button>
+                                </div> 
+                            </div>
+
                             <div className="row bg-light justify-content-center">
                                     <i className="fas fa-chevron-up fa-2x text-muted" data-toggle="collapse" data-target={`#collapseExample${index}`} onClick={() => {this.setState({flag: !this.state.flag})}} aria-expanded="false" aria-controls={`collapseExample${index}`}></i>
                             </div>
+
                         </div>
 
                     </div>
@@ -73,5 +81,13 @@ class Options extends Component {
         );
     }
 }
- 
-export default Options;
+
+// Options.propTypes = {
+//     favourites : PropTypes.func.isRequired,
+//     item: PropTypes.object.isRequired
+//   }
+//   const mapStateToProps = (state) => ({
+//     item: state.user
+//   })
+  
+  export default Options;
