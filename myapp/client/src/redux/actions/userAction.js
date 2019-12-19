@@ -1,8 +1,21 @@
-import { ADD_USER, LOG_OUT_USER, LOGIN_USER, GET_USER_ACTIVE} from '../actions/types';
+import { ADD_USER, LOG_OUT_USER, LOGIN_USER, GET_USER_ACTIVE, GET_FAVOURITES} from '../actions/types';
 
+
+//<--------------------------------- ADD USER ---------------------------------->
 export const addUser = data => async dispatch => {
-  console.log(data, 'info enviada al action del formulario addUser');
+  /* 
+  data : {
+    userName: String,
+    firstname : String,
+    lastName : String, 
+    password : String,
+    email: String,
+    TermsAndConditions: Boolean,
+    country: String,
+  }
+  */
 
+  //cabeceras para realizar mi fetch
   var myInit = {
     method: 'POST',
     body: JSON.stringify(data),
@@ -11,27 +24,45 @@ export const addUser = data => async dispatch => {
     }
   };
 
+  //url
   var urls = ['http://localhost:5000/user/register'];
 
+  //fetch hacia el servidor
   let resp = await fetch(urls[0], myInit).then(res => {
-    console.log(res.cookies, 'cookie')
+    //la respuesta retorna el token nuevo para el usuario
     return res.json()
   });
-  console.log(resp, 'adduser');
+
+  /*
+  resp : {
+    token: String
+  }
+  */
 
   dispatch({
     type: ADD_USER,
     payload: resp
   })
 
+  //despues de hacer el dispatch ( guardar el token en el estado redux), 
+  //entonces redirecciona el home con el token, para guardarlo en el localStorage
   if (resp.token){
     window.location.href = `http://localhost:3000/home/?token=${resp.token}`;
   }
 };
 
-export const login = data => async dispatch => {
-  console.log(data, 'info enviada al action del formulario login');
 
+//<------------------------------- LOGIN USER ----------------------------------->
+export const login = data => async dispatch => {
+  /*
+  data: {
+    userName : String,
+    password: String,
+  }
+
+  */
+
+  //cabeceras
   var myInit = {
     method: 'POST',
     body: JSON.stringify(data),
@@ -40,52 +71,64 @@ export const login = data => async dispatch => {
     }
   };
 
+  //url
   var urls = ['http://localhost:5000/user/login'];
 
+  //fetch realizado al servidor
   var resp = await fetch(urls[0], myInit).then(res => {
+    //la respuesta retorna el token del usuario logeado
     return res.json()});
-  // if (resp.ok){
-  //   window.location.href = 'http://localhost:3000/home';
-  // }
-  console.log(resp);
+
 
   dispatch({
     type: LOGIN_USER,
     payload: resp
   });
 
-  window.location.href = `http://localhost:5000/?token=${resp.token}`
+  //despues de hacer el dispatch ( guardar el token en el estado redux), 
+  //entonces redirecciona el home con el token, para guardarlo en el localStorage
+  if (resp.token){
+    window.location.href = `http://localhost:3000/home/?token=${resp.token}`
+  }
+  
 };
 
+
+//<---------------------------------- GET USER ACTIVE --------------------------------------->
 export const getUserActive = (token) => async (dispatch) => {
-    console.log(token, "token recibido en el action")
 
-    var options = {
-      method: 'POST',
-      headers : {
-        'Content-Type' : 'Application/json',
-        'Authorization' : `bearer ${token}`
-      }
+  //cabeceras
+  var options = {
+    method: 'POST',
+    headers : {
+      'Content-Type' : 'Application/json',
+      'Authorization' : `bearer ${token}`
     }
+  }
 
 
-    var user = await fetch ('http://localhost:5000/user/auth', options).then(resp => resp.json())
-    console.log(user, 'usuario ')
-      var {password , ...sinPassword} = user
+  var user = await fetch ('http://localhost:5000/user/auth', options).then(resp => {
+    //mi pagina necesita saber si el usuario esta logeado cada refresh de pagina, entonces me responde con los datos del usuario del JWT
+    return resp.json()
+  })
 
-    console.log(sinPassword, 'usuario sin constraseña')
+  /*
+  user : {
+    _id : ObjectId,
+    userName : String,
+    lastName : String,
+    firstName : String,
+    password : String (cifrada con bcrypt),
+    country : String
+  }
+  */
 
-    dispatch ({
-      type: GET_USER_ACTIVE,
-      payload: sinPassword
-    })
-}
+  //retiro la password al momento de enviar la info a mi pagina
+  var {password , ...sinPassword} = user
 
-
-export const logOut = (dispatch) => {
-  
+  //actualizo mi estado de redux
   dispatch ({
-    type: LOG_OUT_USER,
-    payload: null
+    type: GET_USER_ACTIVE,
+    payload: sinPassword
   })
 }

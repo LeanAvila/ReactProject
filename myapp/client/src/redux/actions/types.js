@@ -6,3 +6,11 @@ export const LOG_OUT_USER = 'LOG_OUT_USER'
 export const LOGIN_USER = 'LOGIN_USER'
 export const GET_USER_ACTIVE = 'GET_USER_ACTIVE'
 export const ADD_USER = 'ADD_USER'
+
+export const ADD_FAVOURITE = 'ADD_FAVOURITES'
+export const DELETE_FAVOURITE = 'DELETE_FAVOURITES'
+export const GET_FAVOURITES = 'GET_FAVOURITES'
+
+export const GET_LIKES = 'GET_LIKES'
+export const ADD_LIKE = 'ADD_LIKE'
+export const DELETE_LIKE = 'DELETE_LIKE'

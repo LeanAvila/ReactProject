@@ -110,12 +110,5 @@ routes
     ],
     userController.login
   )
-
-  //<----------------------------- Favourites --------------------------------->
-  .get('/favourites/:user', (req, res) => {
-
-  })
-  .post('/favourites/:user/:id', (req, res) => {
-    
-  })
+  
 module.exports = routes;

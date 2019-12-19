@@ -7,9 +7,9 @@ const Cities = moongose.model('cities');
 
 //<--------------------- Return Itineraries of a City ------------------------>
 routes.get("/:id", (req, res) => {
-    let cityRequested = req.params.name;
+    let cityRequested = req.params.id;
     console.log(cityRequested)
-	itineraryModel.find({itineraries: cityRequested}).then((itineraries) => {
+	itineraryModel.find({cityId: cityRequested}).then((itineraries) => {
         Cities.populate(itineraries, {path: "cityId"},function(err, itineraries){
             res.send(itineraries);
         }); 

@@ -35,6 +35,9 @@ var userSchema = new Schema({
   favourites:{
     type: Array
   },
+  likes: {
+    type: Array
+  },
   lastLoginDate: {
     type: Date,
     default: Date.now()

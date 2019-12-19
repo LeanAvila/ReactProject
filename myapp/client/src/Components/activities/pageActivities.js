@@ -36,7 +36,7 @@ class PageActivities extends Component {
 PageActivities.propTypes = {
   getActivities: PropTypes.func.isRequired,
   flag:PropTypes.bool,
-  item: PropTypes.array.isRequired
+  item: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
   item: state.activities

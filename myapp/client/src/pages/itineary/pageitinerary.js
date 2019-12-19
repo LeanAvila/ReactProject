@@ -16,22 +16,19 @@ class PageItinerary extends Component {
     let cityId = this.props.match.params.id;
     await this.props.getItinerary(cityId);
     console.log(this.props.item)
-
-    this.setState({
-      itinerary: this.props.item.itineraries
-    })
   }
 
   render() {
+    console.log(this.props.item.flag, 'flag de itineraryPage')
     return (
       this.props.item.flag?
-      <Itinerary itinerary = {this.state.itinerary}/>: null
+      <Itinerary itinerary = {this.props.item.itineraries}/>: null
     )
   }
 }
 PageItinerary.propTypes = {
   getItinerary: PropTypes.func.isRequired,
-  item: PropTypes.array.isRequired
+  item: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
   item: state.itinerary

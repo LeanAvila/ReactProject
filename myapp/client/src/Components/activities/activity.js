@@ -26,10 +26,10 @@ export default class Activity extends Component {
                 >
                     {this.state.activities.map(item => {
                         return (
-                            <div class="card">
+                            <div className="card">
                                 <img className="img-fluid border " src={item.pic} />
-                                <div class="card-img-overlay p-3 pt-5">
-                                    <p class="card-text text-white text-center m-3">{item.details}</p>
+                                <div className="card-img-overlay p-3 pt-5">
+                                    <p className="card-text text-white text-center m-3">{item.details}</p>
                                 </div>
                             </div>
                         )

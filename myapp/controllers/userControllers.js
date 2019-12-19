@@ -31,7 +31,8 @@ exports.create = (req, res) => {
         let payload = {
           _id: user._id,
           userName: user.userName,
-          avatarPicture: user.avatarPicture
+          avatarPicture: user.avatarPicture,
+          favourites: user.favourites
         };
 
         //creando el token
@@ -92,7 +93,8 @@ exports.login = (req, res) => {
             let payload = {
               _id: user._id,
               userName: user.userName,
-              avatarPicture: user.avatarPicture
+              avatarPicture: user.avatarPicture,
+              favourites: user.favourites
             };
 
             //creando el token
