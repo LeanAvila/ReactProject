@@ -6,8 +6,9 @@ import NavBar from '../../Components/navbar/navbarPage'
 import 'bootstrap/dist/css/bootstrap.css'
 import { connect } from 'react-redux'
 import { getUserActive } from '../../redux/actions/userAction'
+import { getCities } from '../../redux/actions/action'
 import {PropTypes} from 'prop-types'
-
+import './styles.css'
 
 class HomePage extends React.Component {
     constructor (props) {
@@ -17,7 +18,9 @@ class HomePage extends React.Component {
             user: {}
         }
     }
-
+    async componentDidMount(){
+        await this.props.getCities()
+    }
     render () {
         console.log(this.props, "props")
         console.log(this.state, "state");
@@ -56,68 +59,70 @@ class HomePage extends React.Component {
                         
                     </div>
                     {/* <--------------------------- Carousel -----------------------------> */}
-                    <div id="carousel" className="carousel slide" data-ride="carousel">
-            
-                        {/* <ol className="carousel-indicators mb-0">
-                            <li data-target="#carousel" data-slide-to="0" className="active bg-dark"></li>
-                            <li data-target="#carousel" data-slide-to="1" className="bg-dark "></li>
-                            <li data-target="#carousel" data-slide-to="2" className="bg-dark "></li>
-                        </ol> */}
 
-                        <div className="carousel-inner">
+                    <div>
+                        {this.props.cities.cities?
 
-                            <div className="carousel-item active">
-                                <div className="container-fluid">
-                                    <div className="row mb-4">
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg " alt="..."/></div>
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg " alt="..."/></div>
-                                    </div>
-                                    <div className="row ">
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                    </div>
-                                </div>
-                            </div>
+                            <div id="carousel" className="carousel slide" data-ride="carousel">
 
-                            <div className="carousel-item">
-                            <div className="container-fluid ">
-                                    <div className="row mb-4">
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                    </div>
-                                    <div className="row ">
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                            <div className="carousel-inner">
+
+                                <div className="carousel-item active">
+                                    <div className="container-fluid">
+                                        <div className="row mb-4">
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[0].pic} className="d-block w-100 rounded-lg " alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[1].pic} className="d-block w-100 rounded-lg " alt="..."/></div>
+                                        </div>
+                                        <div className="row ">
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[2].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[3].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div className="carousel-item">
+                                
+                                <div className="carousel-item">
                                 <div className="container-fluid ">
-                                    <div className="row mb-4">
-                                        <div className="col"><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                    </div>
-                                    <div className="row">
-                                        <div className="col"><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
-                                        <div className="col "><img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" className="d-block w-100 rounded-lg" alt="..."/></div>
+                                        <div className="row mb-4">
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[3].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[4].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                        </div>
+                                        <div className="row ">
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[5].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[6].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                        </div>
                                     </div>
                                 </div>
+
+                                <div className="carousel-item">
+                                    <div className="container-fluid ">
+                                        <div className="row mb-4">
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[7].pic}className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[8].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                        </div>
+                                        <div className="row">
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[9].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[10].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
                             </div>
 
-                        </div>
-
-                        {/*<--------------------- Buttons from Carousel ---------------------> */}
-                        <a className="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
-                            <span className="fas fa-chevron-left text-dark" aria-hidden="true"></span>
-                            <span className="sr-only">Previous</span>
-                        </a>
-                        <a className="carousel-control-next" href="#carousel" role="button" data-slide="next">
-                            <span className="fas fa-chevron-right text-dark" aria-hidden="true"></span>
-                            <span className="sr-only">Next</span>
-                        </a>
+                            {/*<--------------------- Buttons from Carousel ---------------------> */}
+                            <a className="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+                                <span className="fas fa-chevron-left text-dark" aria-hidden="true"></span>
+                                <span className="sr-only">Previous</span>
+                            </a>
+                            <a className="carousel-control-next" href="#carousel" role="button" data-slide="next">
+                                <span className="fas fa-chevron-right text-dark" aria-hidden="true"></span>
+                                <span className="sr-only">Next</span>
+                            </a>
+                            </div>
+                            :
+                            null
+                        }
                     </div>
-                </div>
+                </div> 
                 {/* </Carousel> */}
 
                 <Footer/> 
@@ -127,10 +132,12 @@ class HomePage extends React.Component {
 }
 HomePage.propTypes = {
     getUserActive : PropTypes.func.isRequired,
+    getCities: PropTypes.func.isRequired,
     item: PropTypes.object.isRequired
   }
   const mapStateToProps = (state) => ({
-    item: state.user
+    item: state.user,
+    cities : state.cities
   })
   
-  export default connect(mapStateToProps, { getUserActive })(HomePage);
+  export default connect(mapStateToProps, { getUserActive, getCities })(HomePage);

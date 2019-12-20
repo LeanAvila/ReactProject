@@ -8,9 +8,28 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken');
 const config = require('../config/keys');
 
+//A favoritos lo agrego en el modelo de mi usuario de mongo db atlas
+
+/*
+
+userModel : {
+    avatarPicture: String,
+    userName: String,
+    password: String,
+    firstName: String,
+    lastName: String,
+    country: String,
+    favourites: Array (contienen los id de los itinerarios),
+    likes : Array (contienen los id de los itinerarios),
+    lastLoginDate: Date,
+    signUpDate: Date
+}
+
+*/
 
 
 //<----------------------------------- ADD FAVOURITE ------------------------------------->
+
 exports.addFavourite = (req, res) => {
     const errors = validationResult(req);
 
@@ -24,19 +43,24 @@ exports.addFavourite = (req, res) => {
         //despues de extraerlo, entonces verificamos si el token sigue siendo valido
         jwt.verify(token[1], config.SECRET_TOKEN, (err, data) => {
             if (err) {
+
                 //si el token no es mas valido, significa que el usuario tiene que volver a loguearse
                 res.status(422).json({errors : ['you is not login, pleace re-login']})
+
             } else {
                 //en caso de que el token sea valido, entonces se actualiza el usuario con el metodo de moongose "findOneAndUpdate"
-                userModel.findOneAndUpdate({_id: data._id}, {$addToSet : {favourites: {$each : [req.body.itineraryId]}}}, (err, data) =>{
+                //es importante agregar la configuracion {new: true} ya que si no, en el callback, el usuario vuelto (err, newUser), no esta actualizado,
+                //entonces con esa propiedad de {new: true} le especificas a mongoose que queres recibir el usuario acualizado.
+                userModel.findOneAndUpdate({_id: data._id}, {$addToSet : {favourites: {$each : [req.body.itineraryId]}}}, {new: true}, (err, newUser) =>{
                     if(err){
+
                         //si hubo un error con la actualizacion de datos, se envia error al cliente
                         res.status(500).send(err)
+
                     }else {
+
                         //si salio todo bien, entonces envio los nuevos favoritos del usuario modificado
-                        userModel.findById({_id: data._id}).then(newUser =>{
-                            res.status(200).send({favourites: newUser.favourites})
-                        })
+                        res.status(200).send({favourites: newUser.favourites})
                         
                     }
                 })
@@ -46,6 +70,7 @@ exports.addFavourite = (req, res) => {
 }
 
 //<--------------------------------- DELETE FAVOURITE ----------------------------------->
+
 exports.deleteFavourite = (req, res) => {
     const errors = validationResult(req);
 
@@ -63,15 +88,19 @@ exports.deleteFavourite = (req, res) => {
                 res.status(422).json({errors : ['you is not login, pleace re-login']})
             } else {
                 //en caso de que el token sea valido, entonces se actualiza el usuario con el metodo de moongose "findOneAndUpdate"
-                userModel.findByIdAndUpdate({_id: data._id}, {$pull : {"favourites": req.body.itineraryId}}).then(user =>{
-                    if (user){
-                        //despues de haberse actualizado, en el user me devuelve el usuario, pero sin haberse modificado (aunque en la base de datos haya cambiado)
-                        //entonces hago devuelta un findById del mismo usuario, y ahí si lo recibo actualizado (sin el elemento favorito que elimine)
-                        userModel.findById({_id: user._id}).then(newUser =>{
-                            res.status(200).send({favourites: newUser.favourites})
-                        })
+                //es importante agregar la configuracion {new: true} ya que si no, en el callback, el usuario vuelto (err, newUser), no esta actualizado,
+                //entonces con esa propiedad de {new: true} le especificas a mongoose que queres recibir el usuario acualizado.
+                userModel.findByIdAndUpdate({_id: data._id}, {$pull : {"favourites": req.body.itineraryId}}, {new: true}).then(newUser =>{
+                    if (newUser){
+
+                        //si salio todo bien, entonces envio los nuevos favoritos del usuario modificado
+                        res.status(200).send({favourites: newUser.favourites})
+
                     }else {
+
+                        //si hubo un error con la actualizacion de datos, se envia error al cliente
                         res.status(500).send({error: 'error al actualizar favoritos'})
+
                     }
                     
                 })
@@ -81,7 +110,7 @@ exports.deleteFavourite = (req, res) => {
 }
 
 
-//<--------------------------------- GET FAVOURITES ----------------------------------->
+//<--------------------------------------- GET FAVOURITES -------------------------------------------->
 
 exports.getFavourites = (req, res) => {
     const errors = validationResult(req);

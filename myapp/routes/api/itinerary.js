@@ -18,7 +18,7 @@ routes.get("/:id", (req, res) => {
 
 
 //<------------------------ Return All itineraries ---------------------------->
-routes.get ('/all', (req, res) => {
+routes.get ('/all/itineraries', (req, res) => {
     itineraryModel.find()
     .then(itineraries => res.json(itineraries))
 })

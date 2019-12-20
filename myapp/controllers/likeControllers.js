@@ -3,7 +3,7 @@ const userModel = require('../model/user');
 
 //documentacion requerida para validacion
 const { validationResult } = require('express-validator');
-
+const itineraryModel = require('../model/itinerary')
 //documentacion requerida para JWT
 const jwt = require('jsonwebtoken');
 const config = require('../config/keys');
@@ -33,7 +33,14 @@ exports.addLike = (req, res) => {
                         //si hubo un error con la actualizacion de datos, se envia error al cliente
                         res.status(500).send(err)
                     }else {
+                        
                         //si salio todo bien, entonces envio los nuevos likes del usuario modificado
+
+                        var itinerary = itineraryModel.findById({_id: req.body.itineraryId})
+                        console.log(itinerary.likes, 'likes antes')
+                        itinerary.update({likes: (itinerary.likes+1)})
+                        console.log(itinerary.likes, 'likes despues')
+                        
                         userModel.findById({_id: data._id}).then(newUser =>{
                             res.status(200).send({likes: newUser.likes})
                         })
