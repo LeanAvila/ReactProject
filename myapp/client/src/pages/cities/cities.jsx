@@ -40,7 +40,7 @@ class PageCities extends React.Component {
                 </div>
                 <div className="container-fluid p-1">
                         {this.props.cities.map((item) =>{
-                            return <Link className="text-decoration-none" to={`/itinerary/${item._id}`}>
+                            return <Link className="text-decoration-none" to={`/itinerary/${item._id}`} key={item._id}>
                                 
                                 <div className="container-fluid border shadow-sm pb-2 pt-2 mb-2 text-center text-dark overflow-hidden">
                                     <div className="">

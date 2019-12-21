@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
 import Options from '../../Components/options/options'
 import Footer from '../../Components/footer/footer'
+
 class Itinerary extends Component {
     constructor (props){
         super (props) 

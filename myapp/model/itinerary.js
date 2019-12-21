@@ -23,6 +23,9 @@ var itinerarySchema = new Schema({
             type: Array
         }
     },
+    comments: {
+        type: Array,
+    },
     hashtag: {
         type: Array,
         required: true

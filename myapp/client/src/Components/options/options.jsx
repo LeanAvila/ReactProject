@@ -5,8 +5,8 @@ import Activities from '../activities/pageActivities'
 import { connect } from 'react-redux';
 import { addFavourite, deleteFavourite, getFavourites } from '../../redux/actions/favouriteActions'
 import { addLike, deleteLike, getLikes } from '../../redux/actions/likeActions'
-
 import {PropTypes} from 'prop-types'
+import { getUserActive } from '../../redux/actions/userAction';
 
 class Options extends Component {
     constructor (props){
@@ -25,36 +25,48 @@ class Options extends Component {
             // this.getLikesDidMount()
             this.props.getLikes(localStorage.getItem('token'))
             this.props.getFavourites(localStorage.getItem('token'))
+            this.props.getUserActive(localStorage.getItem('token'))
         }
 
     }
 
+
+
+    /*
+    this.props = {
+        favourites: Array,
+        likes: Array,
+        Itinerary: 
+    }
+    
+    */
     render() { 
         console.log(this.props, "options")
         let isFavouriteThisItinerary = []
         let isLikedThisItinerary = []
+        let key = 0
         return (
             <div >
                 {
                 this.props.itinerary.map((item, index) => {
                     //antes de hacer el map pregunto si los favouritos estan, para no estar preguntando cada vez que lo quiera utilizar en una parte del codigo
 
-                    if(this.props.likes.length){
+                    if(this.props.favourites || this.props.likes){
                         //en la variable "isFavouriteThisItinerary" el id del itinerary si es que esta entre los favoritos
                         isFavouriteThisItinerary = this.props.favourites.filter(itineraryIsFavourite => itineraryIsFavourite == item._id)
+
+                        //lo mismo con "isLikedThisItinerary"
                         isLikedThisItinerary = this.props.likes.filter(itineraryLiked => itineraryLiked == item._id)
-                        console.log(item._id, 'id ');
-                        
-                        console.log(isFavouriteThisItinerary, 'isFavouroteThisItinerary')
+
                         return (
                         //<----------------------------------------------  ITINERARY ---------------------------------------------->
-                        <div className="container-fluid border shadow-sm rounded mb-2">
+                        <div className="container-fluid border shadow-sm rounded mb-2" key={key++}>
 
                             <div className="row">
 
                                 {/*<- DATA OF THE USER -> */}
                                 <div className="col-4 pt-4">
-                                    <div className="">
+                                    <div>
                                         <div className="text-center ">
                                             <img  className="rounded-circle" src={`https://picsum.photos/100/100?random=${index}`} alt=""/>
                                             <p className="mt-2 text-muted">GaudiLover</p>  
@@ -92,9 +104,9 @@ class Options extends Component {
                                             <div className="d-inline ml-3">
                                                 {isLikedThisItinerary.length?
 
-                                                    <i class="fas fa-thumbs-up" onClick={()=> this.props.deleteLike(item._id, localStorage.getItem('token'))}></i>
+                                                    <i className="fas fa-thumbs-up" onClick={()=> this.props.deleteLike(item._id, localStorage.getItem('token'))}></i>
                                                     :
-                                                    <i class="far fa-thumbs-up" onClick={()=> this.props.addLike(item._id, localStorage.getItem('token'))}></i>
+                                                    <i className="far fa-thumbs-up" onClick={()=> this.props.addLike(item._id, localStorage.getItem('token'))}></i>
                                                 }
                                             </div>
 
@@ -110,7 +122,14 @@ class Options extends Component {
                                     </div>
                                     <div className="row p-3">
                                         <div className="col">
-                                            <p>{item.hashtag.map(hashtag => ( <strong>{hashtag} </strong>))}</p>
+                                            <p>{item.hashtag.map(hashtag => {
+                                                
+                                                
+                                                return (
+                                                    <strong key={key++}>{hashtag} </strong>
+                                                )
+
+                                            })}</p>
                                         </div>
                                     </div>
                                     
@@ -125,25 +144,122 @@ class Options extends Component {
                             </div>
                             {/*<----------------- COLLAPSE ---------------> */}
                             <div className="collapse container-fluid p-1" id={`collapseExample${index}`}>
-                                <div className="container-fluid">
+                                <div className="container-fluid mb-4">
                                     <h5 className="text-center m-4">Activities</h5>
                                     <div>
                                         <Activities id={item._id}/>
                                     </div>
                                 </div>
                                 
-                                {/*<----------------- COMMENTS ---------------> */}
-                                <div className="mt-5 px-1">
+                                {/*<----------------- COMMENTS SECCION ---------------> */}
+                                <div className="container-fluid text-center px-1 my-4">
+                                    <h5>Comments</h5>
+                                </div>
+
+                                {/* <-- INPUT COMMENT --> */}
+                                <div className="my-4 px-1">
                                     <div className="row">
-                                        <div className="col-1"></div>
-                                        <div className="col-9 text-center">
+                                        <div className="col-2 text-center">
+                                            <img className="rounded-circle img-thumbnail" id="avatar-comments" src={this.props.user.avatarPicture} alt={this.props.user.firstName}/>
+                                        </div>
+                                        <div className="col-9 text-center pt-2">
                                             <input type="text" className="form-control" name="userName" placeholder="Your Comment"/>
                                         </div>
-                                        <div className="col-2">
-                                            <i class="fas fa-caret-right fa-2x"></i>
+                                        <div className="col-1 pt-2">
+                                            <i className="fas fa-caret-right fa-2x"></i>
                                         </div>
                                     </div>
                                 </div>
+
+                                {/* <-- COMMENTS --> */}
+                                <div className="my-3 container-fluid  border-bottom">
+                                    <div className="row py-3 border-top">
+                                        <div className="col-2">
+                                            <div className="row">
+                                                <div className="col">
+                                                    <img  className="rounded-circle img-thumbnail" src={`https://picsum.photos/80?random=${index}`} alt=""/> 
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+
+                                        <div className="col-10">
+                                            <div className="row">
+                                                <div className="col-7">
+                                                    <h6>Usuario</h6>
+                                                </div>
+                                                <div className="col-5 ">
+                                                    <p className="text-muted">12:00:00 10-10-2019</p>
+                                                </div>
+                                            </div>
+                                            <div className="row px-3">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel tortor accumsan, venenatis diam vitae, rutrum nibh.
+                                                     Maecenas turpis leo, varius quis lobortis eu, placerat id diam</p>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-1">
+                                                    <i class="fas fa-pen"></i>
+                                                </div>
+                                                <div className="col-1 ">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                                <div className="col-7">
+
+                                                </div>
+                                                <div className="col-1">
+                                                    <i class="fas fa-comment"></i>
+                                                </div>
+                                                <div className="col-1">
+                                                    <i class="fas fa-share"></i>
+                                                </div>
+                                                <div className="col-1">
+                                                    <i className="far fa-thumbs-up"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="row py-3 border-top">
+                                        <div className="col-2">
+                                            <img  className="rounded-circle img-thumbnail" src={`https://picsum.photos/80?random=${index}`} alt=""/> 
+                                        </div>
+
+                                        <div className="col-10">
+                                            <div className="row">
+                                                <div className="col-7">
+                                                    <h6>Usuario</h6>
+                                                </div>
+                                                <div className="col-5 ">
+                                                    <p className="text-muted">12:00:00 10-10-2019</p>
+                                                </div>
+                                            </div>
+                                            <div className="row px-3">
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vel tortor accumsan, venenatis diam vitae, rutrum nibh.
+                                                     Maecenas turpis leo, varius quis lobortis eu, placerat id diam</p>
+                                            </div>
+                                            <div className="row">
+                                                <div className="col-1">
+                                                    <i class="fas fa-pen"></i>
+                                                </div>
+                                                <div className="col-1 ">
+                                                    <i class="fas fa-trash"></i>
+                                                </div>
+                                                <div className="col-7">
+                                                    
+                                                </div>
+                                                <div className="col-1">
+                                                    <i class="fas fa-comment"></i>
+                                                </div>
+                                                <div className="col-1">
+                                                    <i class="fas fa-share"></i>
+                                                </div>
+                                                <div className="col-1">
+                                                    <i className="far fa-thumbs-up"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
 
 
 
@@ -167,19 +283,20 @@ Options.propTypes = {
     addFavourite : PropTypes.func.isRequired,
     deleteFavourite : PropTypes.func.isRequired,
     getFavourites : PropTypes.func.isRequired,
-    favourites: PropTypes.object.isRequired,
+    favourites: PropTypes.array.isRequired,
     //likes
     addLike : PropTypes.func.isRequired,
     deleteLike : PropTypes.func.isRequired,
     getLikes : PropTypes.func.isRequired,
-    likes: PropTypes.object.isRequired,
-    
+    likes: PropTypes.array.isRequired,
+    //users
+    getUserActive : PropTypes.func.isRequired,
     user: PropTypes.object.isRequired
   }
   const mapStateToProps = (state) => ({
     favourites: state.favourites.favourites,
-    user: state.user,
+    user: state.user.user,
     likes: state.likes.likes
   })
   
-  export default connect(mapStateToProps, { addFavourite, deleteFavourite, getFavourites, addLike, deleteLike, getLikes })(Options);
+  export default connect(mapStateToProps, { addFavourite, deleteFavourite, getFavourites, addLike, deleteLike, getLikes, getUserActive })(Options);

@@ -176,6 +176,7 @@ exports.deleteLike = (req, res) => {
                                         itinerary.updateOne({$inc: {"likes.total": -1}, $pull : {"likes.users" : user._id}}).then(newItinerary =>{
                                             console.log('newItinerary', newItinerary)
                                         }).catch(error => console.log(error))
+                                        
                                         //y se actualiza el usuario (eliminando el id del itinerario de sus likes)
                                         user.updateOne({$pull : {"likes": req.body.itineraryId}}).then(result =>{
                                             if(result.ok){
