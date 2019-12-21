@@ -14,7 +14,6 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 //extraigo del header el token con "ExtractJwt.fromAuthHeaderAsBearerToken()" y lo agrego a mi obj de "opts"
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-
 //agrego mi SECRET_TOKEN a mi obj de "opts"
 opts.secretOrKey = config.SECRET_TOKEN;
 

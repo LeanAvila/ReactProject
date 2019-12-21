@@ -1,4 +1,4 @@
-import { ADD_USER, LOG_OUT_USER, LOGIN_USER, GET_USER_ACTIVE, GET_FAVOURITES} from '../actions/types';
+import { ADD_USER, LOGIN_USER, GET_USER_ACTIVE } from '../actions/types';
 
 
 //<--------------------------------- ADD USER ---------------------------------->
@@ -47,7 +47,7 @@ export const addUser = data => async dispatch => {
   //despues de hacer el dispatch ( guardar el token en el estado redux), 
   //entonces redirecciona el home con el token, para guardarlo en el localStorage
   if (resp.token){
-    window.location.href = `http://localhost:3000/home/?token=${resp.token}`;
+    window.location.href = `http://localhost:3000/?token=${resp.token}`;
   }
 };
 
@@ -88,7 +88,7 @@ export const login = data => async dispatch => {
   //despues de hacer el dispatch ( guardar el token en el estado redux), 
   //entonces redirecciona el home con el token, para guardarlo en el localStorage
   if (resp.token){
-    window.location.href = `http://localhost:3000/home/?token=${resp.token}`
+    window.location.href = `http://localhost:3000/?token=${resp.token}`
   }
   
 };

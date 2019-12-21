@@ -16,7 +16,12 @@ var itinerarySchema = new Schema({
         required: true
     },
     likes: {
-        type: Number
+        total: {
+            type: Number
+        },
+        users: {
+            type: Array
+        }
     },
     hashtag: {
         type: Array,

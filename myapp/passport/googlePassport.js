@@ -6,7 +6,7 @@ const userModel = require('../model/user');
 //documentacion requerida para JWT
 const jwt = require('jsonwebtoken');
 const config = require('../config/keys');
-const options = { expiresIn: 2592000 };
+const options = { expiresIn: '1d' };
 
 
 

@@ -1,13 +1,5 @@
-
 import { GET_CITIES} from '../actions/types'
 
-// export const getCities = () => async (dispatch) => {
-//     var data = await fetch('http://localhost:5000/api/cities').then((resp) => resp.json())
-//     dispatch({
-//         type: GET_CITIES,
-//         payload: data
-//     })
-// }
 
 export const getCities = () => async (dispatch) => {
     var urls = [

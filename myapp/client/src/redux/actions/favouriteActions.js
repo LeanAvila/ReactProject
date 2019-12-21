@@ -66,7 +66,7 @@ export const deleteFavourite = (itineraryId, token) => async (dispatch) =>{
   
     dispatch({
       type: DELETE_FAVOURITE,
-      payload: resp
+      payload: resp.favourites
     })
 }
 

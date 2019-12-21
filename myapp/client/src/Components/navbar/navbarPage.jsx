@@ -12,35 +12,42 @@ import queryString from 'query-string';
 class NavBar extends Component {
 constructor(props){
   super(props)
-
-  this.state = {
-    user : {},
-    token : ""
-  }
-
+  
 }
 
 async componentDidMount(){
+  /*
+  "this.props.location" la recibo desde las propiedades, porque dado que este es un componente, no tiene una ruta predefinida en el App.js (en mi caso el index.js)
+  es por eso que cada vez que agrego el componente en una pagina nueva, le paso como propiedad "this.props.location" (ver en ../../pages)
+  si esto no se hace, cuando llamas a this.props.location.search, te tira undefined
+  */
   let params = queryString.parse(this.props.location.search)
+  //
+  /*
+  search es un metodo que busca si hay query en mi URL (localhost:5000/?token=12345), pero devuelve un String
+  ese String lo convierto en un objeto a traves de "queryString.parse()"
+
+  params = {
+    token: Valor
+  }
+
+  */
   let localStoreToken = localStorage.getItem('token');
 
-
+  //primero pregunto si existe en mi localStorage si existe el item 'token'
   if (localStoreToken){
-    
-    this.setState({
-      token: localStoreToken
-    })
 
+    //si existe llamo a la funcion "getUserActive(token)" que me va a actualizar mi estado de redux con los datos del usuario logueado
     await this.props.getUserActive(localStoreToken);
-  }else if (params){
-    //si existen parametros pregunto si existe token
+    //mas abajo especifico que me trae "this.props.item" (estado de mi usuario logueado)
+
+  }else if (params){//en caso de que no exista token pregunto si hay parametros en la URL, si no los hay no hace nada
+
+    //si existen parametros pregunto si existe token (esto porque en mi ruta "localhost:3000/signup" tambien recibo parametros por URL, esto es para evitar problemas)
       if (params.token){
+
         //si existe token en la url entonces lo guardo en el localStorage
         localStorage.setItem('token', params.token)
-
-        this.setState({
-          token: params.token
-        })
 
         //realizo el fetch para pedir los datos del usuario (para cargarlos en el navbar)
         await this.props.getUserActive(params.token);
@@ -48,24 +55,42 @@ async componentDidMount(){
   }
 }
 
-render() {
-  
-  console.log(this.props.item.user, 'props')
-  return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+/*
+this.props.item = {
+  user : {
+    userName : String,
+    firstName : String,
+    lastName : String,
+    avatarPicture : String,
+    country : String,
+    favourites: Array,
+    likes : Array,
+    
+  }
+}
+*/
 
-      {/*<!------------------ Icon Avatar with DropDown --------------------!>*/}
+render() {
+  return (
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+
+      {/*<!--------------------------------- ICON AVATAR CONNECT WITH DROPDOWN  ------------------------------!>*/}
+
       <a className="text-muted mr-3" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+        {/* Consulto si el usuario esta logueado (lo que significa que en mi estado de redux tengo que tener los datos del usuario) */}
         {this.props.item.user.avatarPicture? 
         <img  className="rounded-circle" src={this.props.item.user.avatarPicture} style={{height: '35px'},{width: '35px'}} alt=""/>
         :
-        
-        // <img  className="rounded-circle" src={avatar} style={{height: '35px'},{width: '35px'}} alt=""/>
         <i className="fas fa-user-circle fa-2x"/>
         }
         
       </a>
-        {/* <-------------------- Nombre del usuario logeado -------------------->*/}
+
+      {/*<- /ICON AVATAR ->*/}
+
+      {/* <----------------------------------- NOMBRE DE USUARIO LOGUEADO ------------------------------------->*/}
+
         {this.props.item.user.firstName ? 
         <div>
           <h5 className="text-white">{this.props.item.user.firstName}  {this.props.item.user.lastName}</h5>
@@ -73,9 +98,15 @@ render() {
         :
         null
         }
+
+      {/*<- /NOMBRE DE USAURIO LOGUEADO -> */}
+      
+
+      {/*<-------------------------------------------- DROPDOWN -----------------------------------------------> */}
+
       <div className="dropdown-menu rounded ml-2" aria-labelledby="navbarDropdownMenuLink">
         {this.props.item.user.email ? 
-        <a href="http://localhost:3000/home" onClick={()=> localStorage.removeItem('token')} className="dropdown-item">Log Out</a> 
+        <a href="http://localhost:3000/" onClick={()=> localStorage.removeItem('token')} className="dropdown-item">Log Out</a> 
         :
         <div>
           <Link to="/signup"className="dropdown-item">Create account</Link>
@@ -85,26 +116,36 @@ render() {
         }
       </div>
 
-      {/*<!------------------ Nav Toggler --------------------!>*/}
+      {/*<- /DROPDOWN -> */}
+
+
+      {/*<!------------------------------------------ NAV TOGGLER ----------------------------------------------!>*/}
+
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon m-1"></span>
       </button>
-
+      
+      {/* ITEMS FROM NAV TOGGLER */}
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
+
           <li className="nav-item active">
             <a className="nav-link" href="#">Home</a>
           </li>
+
           <li className="nav-item">
             <a className="nav-link" href="#">Features</a>
           </li>
+
           <li className="nav-item">
             <a className="nav-link" href="#">Pricing</a>
           </li>
+
         </ul>
       </div>
 
-      </nav>
+      {/*<- /NAV TOGGLER ->*/}
+    </nav>
     );
   }
 }

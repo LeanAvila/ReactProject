@@ -14,6 +14,32 @@ const options = { expiresIn: 2592000 };
 const url = require('url'); 
 
 
+//<---------------------------- Auth JWT ------------------------------------->
+
+exports.authJwt = (req, res) => {
+  /*
+  parametros del usuario devueltos despues de desifrar el token con el middleware JWT (../passport/passport.js)
+
+  req.user = {
+    _id: ObjetctId,
+    userName: String,
+    firstName : String,
+    lastName : String,
+    password: String,
+    country: String,
+  }
+  
+  */
+
+  userModel.findOne({ _id: req.user._id })
+    .then(user => {
+      //retorno los datos del usuario
+      res.json(user);
+    })
+    //en caso de que no existe, es porque el usuario no existe o hubo algun error al desifrar el token (token expirado/invalido)
+    .catch(err => res.status(500).json({ err }));
+}
+
 //<------------------------- Create Controller ------------------------------->
 
 exports.create = (req, res) => {
@@ -136,7 +162,7 @@ exports.googleCallback = (req, res) => {
   if(req.authInfo.message){
 
     //redireccionando a la pagina principal con el token en la URL (en el query)
-    res.status(301).redirect(`http://localhost:3000/home/?token=${req.user}`)
+    res.status(301).redirect(`http://localhost:3000/?token=${req.user}`)
 
   }else {
 

@@ -1,29 +1,19 @@
-const express = require('express');
-const moongose = require('mongoose');
 const userController = require('../../controllers/userControllers');
-const routes = express.Router();
-const userModel = require('../../model/user');
-const { check, body } = require('express-validator');
 const passport = require('passport');
-
+const express = require('express');
+const routes = express.Router();
+const userValidations = require('../../validations/userValidations')
 
 routes
 
-  //<---------------------------- Auth JWT ---------------------------------->
+  //<--------------------------------- Auth JWT ------------------------------------>
   .post(
-    '/auth',
+    '/auth', 
     passport.authenticate('jwt', { session: false }),
-    (req, res) => {
-      userModel
-        .findOne({ _id: req.user._id })
-        .then(user => {
-          res.json(user);
-        })
-        .catch(err => res.status(404).json({ error: 'User does not exist!' }));
-    }
+    userController.authJwt 
   )
   
-  //<------------------------- Auth With Google ------------------------------->
+  //<----------------------------- Auth With Google -------------------------------->
   .get(
     '/auth/google/callback',
     passport.authenticate('google', { session: false }),
@@ -32,82 +22,18 @@ routes
 
   .get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }))
 
-  //<---------------------------- Register User ------------------------------>
+
+  //<------------------------------- Register User --------------------------------->
   .post(
-    '/register',
-    [
-      check('avatarPicture').not().isEmpty().isString(),
-      
-      //verifico si el username "esta usado", "si contiene algun valor"
-      body('userName').custom(value => {
-        if (value) {
-          return userModel.find({ userName: value }).then(user => {
-            if (user.length) {
-              return Promise.reject('Username already exist');
-            }
-          });
-        } else {
-          return Promise.reject('Username is required');
-        }
-      }),
-
-      //verifico si la password "minimo requerido de caracteres", "si contiene algun valor"
-      body('password').custom(value => {
-        if (value) {
-          if (!value.length >= 5) {
-            throw new Error('The min required for password is 5 characters');
-          }
-
-          return true;
-        } else {
-          return Promise.reject('Password is required');
-        }
-      }),
-
-      //verifico si las contraseñas coinciden
-      body('passwordConfirmation').custom((value, { req }) => {
-        if (value) {
-          if (value !== req.body.password) {
-            throw new Error('Password confirmation does not match password');
-          }
-
-          // Indicates the success of this synchronous custom validator
-          return true;
-        } else {
-          return Promise.reject('Confirm Password is required');
-        }
-      }),
-
-      check('firstName', 'First Name is required').not().isEmpty(),
-
-
-      //verifico si el email "ya esta usado", "si tiene algun valor (requerido)"
-      body('email').custom(value => {
-        if (value) {
-          return userModel.find({ email: value }).then(user => {
-            if (user.length) {
-              return Promise.reject('Email already in use');
-            }
-          });
-        } else {
-          return Promise.reject('Email is required');
-        }
-      }),
-
-      check('lastName', 'Last Name is required').not().isEmpty(),
-      check('country', 'The Country is required').not().isEmpty()
-    ],
+    '/register', 
+    userValidations.create,
     userController.create
   )
 
-
-  //<------------------------------- Login User ------------------------------->
+  //<-------------------------------- Login User ------------------------------------>
   .post(
-    '/login',
-    [
-      check('userName').not().isEmpty(),
-      check('password').not().isEmpty()
-    ],
+    '/login', 
+    userValidations.login,
     userController.login
   )
   

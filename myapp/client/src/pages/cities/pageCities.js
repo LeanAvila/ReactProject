@@ -23,13 +23,18 @@ class Cities extends Component {
     })
   }
 
+
+
+  //filtro de ciudades
   filterCities = (cityFilter) => {
     let filteredCities = this.state.cities
     const expresion = new RegExp (`^${cityFilter}`,'i')
 
     filteredCities = filteredCities.filter((cities) => {
       var city = cities.city + ", " + cities.country
-      return expresion.test(city);
+      if(expresion.test(cities.city) || expresion.test(cities.country)){
+        return city
+      };
     })
 
     this.setState({
@@ -48,7 +53,7 @@ class Cities extends Component {
 }
 Cities.propTypes = {
   getCities: PropTypes.func.isRequired,
-  item: PropTypes.array.isRequired
+  item: PropTypes.object.isRequired
 }
 const mapStateToProps = (state) => ({
   item: state.cities
