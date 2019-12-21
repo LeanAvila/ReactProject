@@ -9,6 +9,7 @@ const itinerary = require('./routes/api/itinerary');
 const activities = require('./routes/api/activities');
 const favourites = require('./routes/api/favourite')
 const likes = require('./routes/api/likes')
+const comment = require('./routes/api/comment')
 
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser');
@@ -46,6 +47,7 @@ app.use('/activities', activities)
 app.use('/user', users)
 app.use('/favourite', favourites)
 app.use('/like', likes)
+app.use('/comment', comment)
 const port = process.env.PORT || 5000
 
 app.listen(port, () => console.log(`server start on port ${port}`));

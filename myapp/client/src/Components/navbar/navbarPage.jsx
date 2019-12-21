@@ -47,7 +47,7 @@ async componentDidMount(){
       if (params.token){
 
         //si existe token en la url entonces lo guardo en el localStorage
-        localStorage.setItem('token', params.token)
+        localStorage.setItem('token', params.token);
 
         //realizo el fetch para pedir los datos del usuario (para cargarlos en el navbar)
         await this.props.getUserActive(params.token);

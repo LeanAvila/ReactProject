@@ -88,30 +88,29 @@ class Options extends Component {
                                         </div>
 
                                         {/*<- BUTTONS OF THE LIKES AND FAVOURITES -> */}
-                                        <div className="col-3 pl-3">
 
                                             {/*<- BUTTON OF THE FAVOURITE -> */}
-                                            <div className="d-inline mr-2">
                                                 {isFavouriteThisItinerary.length?
-
-                                                    <i className="fas fa-heart fa-1x" onClick={() => this.props.deleteFavourite(item._id, localStorage.getItem('token'))}></i>
+                                                    <div className="col-1">
+                                                        <i className="fas fa-heart " onClick={() => this.props.deleteFavourite(item._id, localStorage.getItem('token'))}></i>
+                                                    </div>
                                                     :
-                                                    <i className="far fa-heart fa-1x" onClick={() => this.props.addFavourite(item._id, localStorage.getItem('token'))} ></i>
+                                                    <div className="col-1">
+                                                        <i className="far fa-heart" onClick={() => this.props.addFavourite(item._id, localStorage.getItem('token'))} ></i>
+                                                    </div>
                                                 }
-                                            </div>
 
                                             {/*<- BUTTON OF THE LIKES -> */}
-                                            <div className="d-inline ml-3">
                                                 {isLikedThisItinerary.length?
-
-                                                    <i className="fas fa-thumbs-up" onClick={()=> this.props.deleteLike(item._id, localStorage.getItem('token'))}></i>
+                                                    <div className="col-1">
+                                                        <i className="fas fa-thumbs-up" onClick={()=> this.props.deleteLike(item._id, localStorage.getItem('token'))}></i>
+                                                    </div>
                                                     :
-                                                    <i className="far fa-thumbs-up" onClick={()=> this.props.addLike(item._id, localStorage.getItem('token'))}></i>
+                                                    <div className="col-1">
+                                                        <i className="far fa-thumbs-up" onClick={()=> this.props.addLike(item._id, localStorage.getItem('token'))}></i>
+                                                    </div>
+                                                    
                                                 }
-                                            </div>
-
-                                        </div>
-                                        
                                     </div>
 
                                     {/*<- DATA OF THE ITINERARY -> */}
@@ -198,19 +197,19 @@ class Options extends Component {
                                             </div>
                                             <div className="row">
                                                 <div className="col-1">
-                                                    <i class="fas fa-pen"></i>
+                                                    <i className="fas fa-pen"></i>
                                                 </div>
                                                 <div className="col-1 ">
-                                                    <i class="fas fa-trash"></i>
+                                                    <i className="fas fa-trash"></i>
                                                 </div>
                                                 <div className="col-7">
 
                                                 </div>
                                                 <div className="col-1">
-                                                    <i class="fas fa-comment"></i>
+                                                    <i className="fas fa-comment"></i>
                                                 </div>
                                                 <div className="col-1">
-                                                    <i class="fas fa-share"></i>
+                                                    <i className="fas fa-share"></i>
                                                 </div>
                                                 <div className="col-1">
                                                     <i className="far fa-thumbs-up"></i>
