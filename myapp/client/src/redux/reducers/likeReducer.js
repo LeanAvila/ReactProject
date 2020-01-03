@@ -1,4 +1,4 @@
-import { ADD_LIKE, DELETE_LIKE, GET_LIKES } from '../actions/types'
+import { ADD_LIKE, DELETE_LIKE, GET_LIKES, ADD_LIKE_ERROR } from '../actions/types'
 
 //estado inicial
 const initialState={
@@ -26,6 +26,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 likes: action.payload,
+                flag: true
+            }
+        case ADD_LIKE_ERROR: 
+            return {
+                ...state,
+                error_auth: action.payload,
                 flag: true
             }
         default: 

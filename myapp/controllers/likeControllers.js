@@ -25,7 +25,7 @@ exports.addLike = (req, res) => {
         jwt.verify(token[1], config.SECRET_TOKEN, (err, token) => {
             if (err) {
                 //si el token no es mas valido, significa que el usuario tiene que volver a loguearse
-                res.status(422).json({errors : ['you is not login, pleace re-login']})
+                res.status(422).json({error_auth : true})
             } else {
                 //<---------------------------------- FORMA SIMPLE DE AGREGAR UN LIKE ---------------------------------------->
                 // itineraryModel.findById({_id: req.body.itineraryId}).then(itinerary =>{
@@ -82,6 +82,7 @@ exports.addLike = (req, res) => {
                                         })
 
                                     }else{
+                                        //en caso de que el usuario ya le haya dado like, entonces no tiro ningun error, simplemente le devuelvo los likes que ya tenía
                                         res.status(500).send({likes: user.likes})
                                     }
 

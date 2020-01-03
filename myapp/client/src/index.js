@@ -8,7 +8,7 @@ import SignUp from './pages/signup/signup'
 import Login from './pages/login/login'
 import HomePage from './pages/home/homePage';
 import store from './redux/store'
-import Itinerary from './pages/itineary/pageitinerary';
+import Itinerary from './pages/itinerary/pageitinerary';
 import NotFound from './pages/notFound/notFound';
 const Routes =
         <Provider

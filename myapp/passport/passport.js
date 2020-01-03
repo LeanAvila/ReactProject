@@ -19,7 +19,7 @@ opts.secretOrKey = config.SECRET_TOKEN;
 
 module.exports = passport.use(
   new JwtStrategy(opts, (jwt_payload, done) => {
-
+    
     //compruebo si el contenido del token (jwt_payload) tiene un usuario que existe en la DB
     userModel.findById(jwt_payload._id)
       .then(user => {

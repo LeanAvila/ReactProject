@@ -96,13 +96,13 @@ export const login = data => async dispatch => {
 
 //<---------------------------------- GET USER ACTIVE --------------------------------------->
 export const getUserActive = (token) => async (dispatch) => {
-
+  
   //cabeceras
   var options = {
     method: 'POST',
     headers : {
       'Content-Type' : 'Application/json',
-      'Authorization' : `bearer ${token}`
+      'Authorization' : `Bearer ${token}`
     }
   }
 
@@ -122,13 +122,9 @@ export const getUserActive = (token) => async (dispatch) => {
     country : String
   }
   */
-
-  //retiro la password al momento de enviar la info a mi pagina
-  var {password , ...sinPassword} = user
-
-  //actualizo mi estado de redux
+  
   dispatch ({
     type: GET_USER_ACTIVE,
-    payload: sinPassword
+    payload: user
   })
 }

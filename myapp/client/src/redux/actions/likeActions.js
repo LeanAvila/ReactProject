@@ -1,4 +1,4 @@
-import { ADD_LIKE, DELETE_LIKE, GET_LIKES} from './types';
+import { ADD_LIKE, DELETE_LIKE, GET_LIKES, ADD_LIKE_ERROR} from './types';
 
 //<------------------------------ ADD LIKE ------------------------------->
 export const addLike = (itineraryId, token) => async (dispatch) =>{
@@ -23,13 +23,22 @@ export const addLike = (itineraryId, token) => async (dispatch) =>{
     return res.json()
   });
   
-  console.log(resp.likes, 'likes actualizado add');
-  
+  console.log(resp, 'respuesta de likes')
+
+  if (resp.error_auth){
+    console.log(resp.error_auth, 'error de auth')
+    dispatch({
+      type: ADD_LIKE_ERROR,
+      payload: resp.error_auth
+    })
+  }else {
+    dispatch({
+      type: ADD_LIKE,
+      payload: resp.likes
+    })
+  }
   //actualizo mi estado de likes
-  dispatch({
-    type: ADD_LIKE,
-    payload: resp.likes
-  })
+  
 }
 
 
@@ -60,7 +69,6 @@ export const deleteLike = (itineraryId, token) => async (dispatch) =>{
     }
     
     */
-    console.log(resp.likes, 'likes actualizado delete');
   
     dispatch({
       type: DELETE_LIKE,
@@ -68,7 +76,7 @@ export const deleteLike = (itineraryId, token) => async (dispatch) =>{
     })
 }
 
-
+//<-------------------------------- GET LIKES ---------------------------------------->
 export const getLikes = (token) => async (dispatch) =>{
 
   var myInit = {
@@ -89,8 +97,6 @@ export const getLikes = (token) => async (dispatch) =>{
       likes: Array
     }
     */
-    console.log(resp, 'todos los likes del usuario');
-  
     dispatch({
       type: GET_LIKES,
       payload: resp.likes

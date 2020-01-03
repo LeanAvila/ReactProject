@@ -33,8 +33,12 @@ exports.authJwt = (req, res) => {
 
   userModel.findOne({ _id: req.user._id })
     .then(user => {
+      console.log(user, 'usuario auth')
+      let {password, ...sinPassword} = user._doc
+
+      console.log(sinPassword, 'usuario sin password')
       //retorno los datos del usuario
-      res.json(user);
+      res.status(200).json(sinPassword);
     })
     //en caso de que no existe, es porque el usuario no existe o hubo algun error al desifrar el token (token expirado/invalido)
     .catch(err => res.status(500).json({ err }));

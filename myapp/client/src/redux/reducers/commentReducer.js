@@ -1,7 +1,8 @@
 import { ADD_COMMENT, DELETE_COMMENT, GET_COMMENTS } from '../actions/types'
+
 //estado inicial
 const initialState={
-    favourites:[],
+    comments:[],
     flag:false
 }
 
@@ -12,19 +13,19 @@ export default function (state = initialState, action) {
         case ADD_COMMENT:
             return {
                 ...state,
-                favourites: action.payload,
+                comments: action.payload,
                 flag: true
             }
         case DELETE_COMMENT: 
             return {
                 ...state,
-                favourites: action.payload,
+                comments: action.payload,
                 flag:true
             }
         case GET_COMMENTS: 
             return {
                 ...state,
-                favourites: action.payload,
+                comments: action.payload,
                 flag: true
             }
         default: 

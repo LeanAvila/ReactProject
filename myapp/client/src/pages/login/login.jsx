@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { connect } from 'react-redux';
 import { login } from '../../redux/actions/userAction';
 import { PropTypes } from 'prop-types';
-
+import './styles.css'
 // funcion de validacion
 const validate = values => {
   const errors = {};
@@ -68,7 +68,7 @@ class Login extends React.Component {
     return (
       <div>
         <NavBar location={this.props.location}/>
-        <div className='container-fluid p-3'>
+        <div className='container-fluid p-3 mt-5'>
           <div className='text-center my-3'>
             <h4>Login</h4>{' '}
           </div>
@@ -133,38 +133,22 @@ class Login extends React.Component {
             </div>
           </form>
 
-          <div className='container-fluid px-3'>
-            <a
-              className='text-muted'
-              href="http://localhost:5000/user/auth/google"
-              target="_parent"
-              alt='login with google'
-            >
-              <div className='row text-center border rounded-pill shadow-sm mb-2'>
-                <div className='col'>
-                  <i class='fab fa-google fa-2x my-3'>
-                    <h5>&nbsp;&nbsp;Log in with Google</h5>
-                  </i>
-                </div>
-              </div>
-            </a>
+          <div className='container-fluid px-5'>
 
-            <div
-              className='text-muted'
-            >
-              <div className='row text-center border rounded-pill shadow-sm'>
-                <div className='col'>
-                  <i class='fab fa-facebook-square fa-2x my-3'>
-                    <h5>&nbsp;&nbsp;Log in with Facebook</h5>
-                  </i>
-                </div>
-              </div>
+            <div className="text-center ">
+              <a href="#" className="btn btn-primary btn-block "><i className="fab fa-facebook-f"></i> Sign in with <b>Facebook</b></a>
+              <a href="#" className="btn btn-info btn-block"><i className="fab fa-twitter"></i> Sign in with <b>Twitter</b></a>
+              <a href="http://localhost:5000/user/auth/google" target="_self" className="btn btn-danger btn-block"><i class="fab fa-google"></i> Sign in with <b>Google</b></a>
             </div>
+
           </div>
         </div>
 
-        <Footer />
+        <Footer/>
+        
       </div>
+
+      
     );
   }
 }

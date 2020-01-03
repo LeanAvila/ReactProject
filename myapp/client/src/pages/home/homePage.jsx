@@ -28,7 +28,7 @@ class HomePage extends React.Component {
         return (
             <div>
                 <NavBar location={this.props.location}/>
-                <div className="container-fluid p-3">
+                <div  className="p-3 mt-3 mb-5 mt-5 overflow-auto ">
                     <Header/>
                     
                     {/* <--------------------------- Title -----------------------------> */}
@@ -83,12 +83,12 @@ class HomePage extends React.Component {
                                 <div className="carousel-item">
                                 <div className="container-fluid ">
                                         <div className="row mb-4">
-                                            <div className="col img-fluid"><img src={this.props.cities.cities[3].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
                                             <div className="col img-fluid"><img src={this.props.cities.cities[4].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[5].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
                                         </div>
                                         <div className="row ">
-                                            <div className="col img-fluid"><img src={this.props.cities.cities[5].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
                                             <div className="col img-fluid"><img src={this.props.cities.cities[6].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[7].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
                                         </div>
                                     </div>
                                 </div>
@@ -96,12 +96,12 @@ class HomePage extends React.Component {
                                 <div className="carousel-item">
                                     <div className="container-fluid ">
                                         <div className="row mb-4">
-                                            <div className="col img-fluid"><img src={this.props.cities.cities[7].pic}className="d-block w-100 rounded-lg" alt="..."/></div>
-                                            <div className="col img-fluid"><img src={this.props.cities.cities[8].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[8].pic}className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[9].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
                                         </div>
                                         <div className="row">
-                                            <div className="col img-fluid"><img src={this.props.cities.cities[9].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
                                             <div className="col img-fluid"><img src={this.props.cities.cities[10].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
+                                            <div className="col img-fluid"><img src={this.props.cities.cities[11].pic} className="d-block w-100 rounded-lg" alt="..."/></div>
                                         </div>
                                     </div>
                                 </div>

@@ -41,7 +41,7 @@ exports.addFavourite = (req, res) => {
         token = req.headers.authorization.split(' ')
 
         //despues de extraerlo, entonces verificamos si el token sigue siendo valido
-        jwt.verify(token[1], config.SECRET_TOKEN, (err, data) => {
+        jwt.verify(token[1], config.SECRET_TOKEN, (err, token) => {
             if (err) {
 
                 //si el token no es mas valido, significa que el usuario tiene que volver a loguearse
@@ -51,7 +51,7 @@ exports.addFavourite = (req, res) => {
                 //en caso de que el token sea valido, entonces se actualiza el usuario con el metodo de moongose "findOneAndUpdate"
                 //es importante agregar la configuracion {new: true} ya que si no, en el callback, el usuario vuelto (err, newUser), no esta actualizado,
                 //entonces con esa propiedad de {new: true} le especificas a mongoose que queres recibir el usuario acualizado.
-                userModel.findOneAndUpdate({_id: data._id}, {$addToSet : {favourites: {$each : [req.body.itineraryId]}}}, {new: true}, (err, newUser) =>{
+                userModel.findOneAndUpdate({_id: token._id}, {$addToSet : {favourites: {$each : [req.body.itineraryId]}}}, {new: true}, (err, newUser) =>{
                     if(err){
 
                         //si hubo un error con la actualizacion de datos, se envia error al cliente
@@ -82,7 +82,7 @@ exports.deleteFavourite = (req, res) => {
         token = req.headers.authorization.split(' ')
 
         //despues de extraerlo, entonces verificamos si el token sigue siendo valido
-        jwt.verify(token[1], config.SECRET_TOKEN, (err, data) => {
+        jwt.verify(token[1], config.SECRET_TOKEN, (err, token) => {
             if (err) {
                 //si el token no es mas valido, significa que el usuario tiene que volver a loguearse
                 res.status(422).json({errors : ['you is not login, pleace re-login']})
@@ -90,7 +90,7 @@ exports.deleteFavourite = (req, res) => {
                 //en caso de que el token sea valido, entonces se actualiza el usuario con el metodo de moongose "findOneAndUpdate"
                 //es importante agregar la configuracion {new: true} ya que si no, en el callback, el usuario vuelto (err, newUser), no esta actualizado,
                 //entonces con esa propiedad de {new: true} le especificas a mongoose que queres recibir el usuario acualizado.
-                userModel.findByIdAndUpdate({_id: data._id}, {$pull : {"favourites": req.body.itineraryId}}, {new: true}).then(newUser =>{
+                userModel.findByIdAndUpdate({_id: token._id}, {$pull : {"favourites": req.body.itineraryId}}, {new: true}).then(newUser =>{
                     if (newUser){
 
                         //si salio todo bien, entonces envio los nuevos favoritos del usuario modificado
@@ -123,13 +123,13 @@ exports.getFavourites = (req, res) => {
         token = req.headers.authorization.split(' ')
 
         //despues de extraerlo, entonces verificamos si el token sigue siendo valido
-        jwt.verify(token[1], config.SECRET_TOKEN, (err, data) => {
+        jwt.verify(token[1], config.SECRET_TOKEN, (err, token) => {
             if (err) {
                 //si el token no es mas valido, significa que el usuario tiene que volver a loguearse
                 res.status(422).json({errors : ['you is not login, pleace re-login']})
             } else {
                 //en caso del que el token sea valido, devolvemos los favoritos del mismo
-                userModel.findById({_id: data._id}).then(user =>{
+                userModel.findById({_id: token._id}).then(user =>{
                     if (user){
                         res.status(200).send({favourites: user.favourites})
                     }else{

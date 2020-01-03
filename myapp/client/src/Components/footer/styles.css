@@ -1,0 +1,8 @@
+/* footer {
+     border-radius: 0px 0px 40px 40px;
+} */
+footer {
+     margin: auto;
+     max-width: 1024px;
+     max-height: 1366px;
+ }

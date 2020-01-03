@@ -5,7 +5,7 @@ import activities from './activityReducer'
 import user from './userReducer'
 import favourites from './favouriteReducer'
 import likes from './likeReducer'
-import comment from './commentReducer'
+import comments from './commentReducer'
 
 export default combineReducers({
     cities,
@@ -14,6 +14,6 @@ export default combineReducers({
     user,
     favourites,
     likes,
-    comment
+    comments
 })
 

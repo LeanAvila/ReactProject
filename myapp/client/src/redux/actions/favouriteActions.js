@@ -2,8 +2,6 @@ import { ADD_FAVOURITE, DELETE_FAVOURITE, GET_FAVOURITES} from './types';
 
 //<------------------------------ ADD FAVOURITES ------------------------------->
 export const addFavourite = (itineraryId, token) => async (dispatch) =>{
-  console.log(itineraryId, token, 'info llegada al action');
-  
 
   //cabeceras
   var myInit = {
@@ -24,8 +22,6 @@ export const addFavourite = (itineraryId, token) => async (dispatch) =>{
     //la respuesta me retorna todos los datos de mi usuario con el favoritos actualizado
     return res.json()
   });
-  
-  console.log(resp.favourites, 'favoritos actualizado add');
   
   //actualizo mi estado de favoritos
   dispatch({
@@ -62,8 +58,6 @@ export const deleteFavourite = (itineraryId, token) => async (dispatch) =>{
     }
     
     */
-    console.log(resp.favourites, 'favoritos actualizado delete');
-  
     dispatch({
       type: DELETE_FAVOURITE,
       payload: resp.favourites
@@ -71,6 +65,7 @@ export const deleteFavourite = (itineraryId, token) => async (dispatch) =>{
 }
 
 
+//<------------------------------------ GET FAVOURITES ------------------------------------->
 export const getFavourites = (token) => async (dispatch) =>{
 
   var myInit = {
@@ -91,7 +86,6 @@ export const getFavourites = (token) => async (dispatch) =>{
       favourites: Array
     }
     */
-    console.log(resp, 'todos los favoritos del usuario');
   
     dispatch({
       type: GET_FAVOURITES,

@@ -102,13 +102,13 @@ class SignUp extends React.Component {
           <div className="container-fluid text-center">
             <div className="text-center my-3"><h4>Create Account</h4> </div>
             {this.state.avatarPicture ? 
-              <img className="img-fluid rounded-circle bg-black shadow-sm img-thumbnail mb-2 mt-2" src={this.state.avatarPicture} alt="Add a pic" style={{height: '150px'}}/>
+              <img className="img-fluid rounded-circle bg-black shadow-sm img-thumbnail mb-2 mt-2" src={this.state.avatarPicture} alt="avatar" style={{height: '150px'}}/>
             :
-              <img className="img-fluid rounded-circle bg-black shadow-sm img-thumbnail mb-2 mt-2" src={addAvatarPicture} alt="Add a Avatar Picture"/>
+              <img className="img-fluid rounded-circle bg-black shadow-sm img-thumbnail mb-2 mt-2" src={addAvatarPicture} alt="Add a Avatar"/>
             }
             
           </div>
-          <div className="container-fluid">
+          <div className="container-fluid pb-2 mb-5">
 
             <form onSubmit={this.handleSubmit} >
 

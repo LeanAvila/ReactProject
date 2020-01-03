@@ -27,6 +27,7 @@ routes
     //verificando si itineraryId no esta vacio
     check ('itineraryId').not().isEmpty().withMessage('missing itineraryId'),
 
+    //verificando si el id del comentario no esta vacio
     check ('commentId').not().isEmpty().withMessage('missing comment id'),
 
     //verificando si el token es enviado en la cabecera "authorization"
@@ -39,9 +40,7 @@ routes
   .post('/all', [
 
     //verificando si el itineraryId no esta vacio
-    check('itineraryId', 'missing itinerary id').not().isEmpty(),
-    //verificando si el token es enviado en la cabecera "authorization"
-    header('authorization', 'el token es requerido').not().isEmpty()
+    check('itineraryId', 'missing itinerary id').not().isEmpty()
     
     ], commentControllers.getComments)
 

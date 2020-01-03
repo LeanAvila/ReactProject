@@ -10,11 +10,11 @@ routes.get ('/all', (req, res) => {
 })
 
 
-//<------------------- Return One City By Name --------------------->
-routes.get('/:name',
+//<------------------- Return One City By Id --------------------->
+routes.get('/:id',
 	(req, res) => {
-  		let cityRequested = req.params.name;
-  		cityModel.findOne({ city: cityRequested })
+  		let cityRequested = req.params.id;
+  		cityModel.findOne({ _id: cityRequested })
 			.then(city => {
 				res.send(city)
 			})

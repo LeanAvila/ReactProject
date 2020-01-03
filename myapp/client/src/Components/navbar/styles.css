@@ -1,0 +1,9 @@
+/* nav{
+    border-radius: 35px 35px 0px 0px;
+} */
+
+nav {
+    margin: auto;
+    max-width: 1024px;
+    max-height: 1366px;
+}

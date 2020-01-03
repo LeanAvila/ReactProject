@@ -5,7 +5,7 @@ import {PropTypes} from 'prop-types'
 import { Link } from 'react-router-dom'
 import { getUserActive } from '../../redux/actions/userAction'
 import queryString from 'query-string';
-
+import './styles.css'
 
 
 
@@ -32,16 +32,9 @@ async componentDidMount(){
   }
 
   */
-  let localStoreToken = localStorage.getItem('token');
+  let localStorageToken = localStorage.getItem('token');
 
-  //primero pregunto si existe en mi localStorage si existe el item 'token'
-  if (localStoreToken){
-
-    //si existe llamo a la funcion "getUserActive(token)" que me va a actualizar mi estado de redux con los datos del usuario logueado
-    await this.props.getUserActive(localStoreToken);
-    //mas abajo especifico que me trae "this.props.item" (estado de mi usuario logueado)
-
-  }else if (params){//en caso de que no exista token pregunto si hay parametros en la URL, si no los hay no hace nada
+  if (params){
 
     //si existen parametros pregunto si existe token (esto porque en mi ruta "localhost:3000/signup" tambien recibo parametros por URL, esto es para evitar problemas)
       if (params.token){
@@ -52,6 +45,10 @@ async componentDidMount(){
         //realizo el fetch para pedir los datos del usuario (para cargarlos en el navbar)
         await this.props.getUserActive(params.token);
       }
+  }else if (localStorageToken){
+    //si existe llamo a la funcion "getUserActive(token)" que me va a actualizar mi estado de redux con los datos del usuario logueado
+    await this.props.getUserActive(localStorageToken);
+    //mas abajo especifico que me trae "this.props.item" (estado de mi usuario logueado)
   }
 }
 
@@ -72,17 +69,17 @@ this.props.item = {
 
 render() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-light bg-light shadow-none border-bottom fixed-top">
 
       {/*<!--------------------------------- ICON AVATAR CONNECT WITH DROPDOWN  ------------------------------!>*/}
 
-      <a className="text-muted mr-3" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <a className="text-muted mr-3 mt-1" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
         {/* Consulto si el usuario esta logueado (lo que significa que en mi estado de redux tengo que tener los datos del usuario) */}
         {this.props.item.user.avatarPicture? 
-        <img  className="rounded-circle" src={this.props.item.user.avatarPicture} style={{height: '35px'},{width: '35px'}} alt=""/>
+        <img  className="rounded-circle" src={this.props.item.user.avatarPicture} style={{height: '40px'},{width: '40px'}} alt=""/>
         :
-        <i className="fas fa-user-circle fa-2x"/>
+        <i className="fas fa-user-circle fa-2x text-dark"/>
         }
         
       </a>
@@ -92,8 +89,8 @@ render() {
       {/* <----------------------------------- NOMBRE DE USUARIO LOGUEADO ------------------------------------->*/}
 
         {this.props.item.user.firstName ? 
-        <div>
-          <h5 className="text-white">{this.props.item.user.firstName}  {this.props.item.user.lastName}</h5>
+        <div className="mr-3 mt-2">
+          <h5 className="text-dark">{this.props.item.user.firstName}  {this.props.item.user.lastName}</h5>
         </div>
         :
         null

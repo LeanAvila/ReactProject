@@ -9,6 +9,7 @@ import { GET_ITINERARY } from '../actions/types'
 //     })
 // }
 
+//<----------------------- GET ITINERARIES ---------------------------->
 export const getItinerary = (id) => async (dispatch) => {
     var urls = [
         "http://localhost:5000/itineraries/" + id
@@ -16,7 +17,6 @@ export const getItinerary = (id) => async (dispatch) => {
     
     var resp = await fetch(urls[0]).
         then(res => res.json());
-    console.log(resp);
     
     dispatch({ 
         type: GET_ITINERARY,

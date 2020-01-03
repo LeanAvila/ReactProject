@@ -24,8 +24,8 @@ class PageCities extends React.Component {
 
         console.log( this.props )
         return (
-            <div>
-                <NavBar location={this.props.location} />
+            <div className="mt-5">
+                <NavBar location={this.props.location}/>
                 <Header/> 
                 <div className="container-fluid" >
                     <div className="row my-3">
@@ -38,7 +38,7 @@ class PageCities extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div className="container-fluid p-1">
+                <div className="container-fluid p-1 mb-5">
                         {this.props.cities.map((item) =>{
                             return <Link className="text-decoration-none" to={`/itinerary/${item._id}`} key={item._id}>
                                 

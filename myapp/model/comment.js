@@ -1,4 +1,5 @@
 var mongoose = require('mongoose')
+const moment = require('moment')
 
 var Schema = mongoose.Schema;
 
@@ -7,13 +8,17 @@ var commentModel = new Schema({
         type: String,
         required: true
     },
+    userName: {
+        type: String,
+        req: true
+    },
     userId:{
         type: Schema.ObjectId,
         ref: "users"
     },
     publicationDate: {
-        type: Date,
-        default: Date.now()
+        type: String,
+        default: moment().format('MMM Do YYYY, H:mm:ss')
     },
     content: {
         type: String,
@@ -25,13 +30,16 @@ var commentModel = new Schema({
             default: 0
         },
         users: {
-            type: Array
+            type: Array,
+            default: []
         }
     },
-    comments: {
-        type: Array,
-        default: []
-    },
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "comments"
+        }
+    ],
     itineraryId: {
         type: Schema.ObjectId,
         ref: "itineraries"

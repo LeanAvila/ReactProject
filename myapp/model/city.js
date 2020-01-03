@@ -15,10 +15,12 @@ var citySchema = new Schema({
         type: String,
         required: true
     },
-    itineraries: {
-        type: Array,
-        required: true
-    }
+    itineraries: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "itineraries"
+        }
+    ]
 })
 
 module.exports = cityModel = mongoose.model('cities', citySchema)

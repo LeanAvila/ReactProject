@@ -33,11 +33,19 @@ var userSchema = new Schema({
     required: true
   },
   favourites:{
-    type: Array
+    type: Array,
+    default: []
   },
   likes: {
-    type: Array
+    type: Array,
+    default: []
   },
+  comments: [
+    {
+        type: Schema.Types.ObjectId,
+        ref: "comments"
+    }
+  ],
   lastLoginDate: {
     type: Date,
     default: Date.now()

@@ -29,7 +29,7 @@ class PageActivities extends Component {
   render() {
     return (
        this.state.flag?
-      <Activities activities = {this.props.item.activities}/>:null
+      <Activities activities = {this.state.activities}/>:null
     )
   }
 }

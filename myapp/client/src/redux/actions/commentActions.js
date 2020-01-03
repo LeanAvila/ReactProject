@@ -2,9 +2,7 @@ import { ADD_COMMENT, DELETE_COMMENT, GET_COMMENTS} from './types';
 
 //<------------------------------ ADD COMMENT ------------------------------->
 export const addComment = (itineraryId, content, token) => async (dispatch) =>{
-  console.log(itineraryId, token, 'info llegada al action');
   
-
   //cabeceras
   var myInit = {
       method: 'POST',
@@ -25,23 +23,22 @@ export const addComment = (itineraryId, content, token) => async (dispatch) =>{
     return res.json()
   });
   
-  console.log(resp.comments, 'favoritos actualizado add');
   
   //actualizo mi estado de favoritos
   dispatch({
     type: ADD_COMMENT,
-    payload: resp.comments
+    payload: resp
   })
 }
 
 
 //<---------------------------------- DELETE FAVOURITE ---------------------------------->
-export const deleteFavourite = (itineraryId, token) => async (dispatch) =>{
+export const deleteComment = (commentId, token) => async (dispatch) =>{
 
   //cabeceras
   var myInit = {
       method: 'POST',
-      body: JSON.stringify({itineraryId}),
+      body: JSON.stringify({commentId}),
       headers: {
         'Content-Type': 'application/json',
         'Authorization' : `Bearer ${token}`
@@ -49,7 +46,7 @@ export const deleteFavourite = (itineraryId, token) => async (dispatch) =>{
     };
 
     //url
-    var urls = [`http://localhost:5000/favourite/delete`];
+    var urls = [`http://localhost:5000/comment/delete`];
   
     //fecth hacia el servidor
     let resp = await fetch(urls[0], myInit).then(res => {
@@ -57,45 +54,38 @@ export const deleteFavourite = (itineraryId, token) => async (dispatch) =>{
     });
 
     /* 
-    resp : {
-      comments : Array
-    }
+    resp : Array
     
     */
-    console.log(resp.comments, 'favoritos actualizado delete');
   
     dispatch({
       type: DELETE_COMMENT,
-      payload: resp.comments
+      payload: resp
     })
 }
 
-
-export const getcomments = (token) => async (dispatch) =>{
+//<--------------------------------- GET COMMENTS ---------------------------------------->
+export const getComments = (itineraryId) => async (dispatch) =>{
 
   var myInit = {
       method: 'POST',
+      body: JSON.stringify({itineraryId}),
       headers: {
-        'Content-Type': 'application/json',
-        'Authorization' : `Bearer ${token}`
+        'Content-Type': 'application/json'
       }
     };
   
-    var urls = [`http://localhost:5000/favourite/all`];
+    var urls = [`http://localhost:5000/comment/all`];
   
     let resp = await fetch(urls[0], myInit).then(res => {
       return res.json()
     });
     /*
-    resp: {
-      comments: Array
-    }
+    resp: Array
     */
-    console.log(resp, 'todos los favoritos del usuario');
-  
     dispatch({
       type: GET_COMMENTS,
-      payload: resp.comments
+      payload: resp
     })
   
 }

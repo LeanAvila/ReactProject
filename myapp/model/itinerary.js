@@ -23,15 +23,17 @@ var itinerarySchema = new Schema({
             type: Array
         }
     },
-    comments: {
-        type: Array
-    },
+    comments: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: "comments"
+        }],
     hashtag: {
         type: Array,
         required: true
     },
     cityId: {
-        type: Schema.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: "cities"
     }
 })
