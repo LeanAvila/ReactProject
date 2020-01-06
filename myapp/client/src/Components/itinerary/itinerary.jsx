@@ -31,6 +31,7 @@ class Itinerary extends Component {
             user: this.props.user,
             show: false,
             setShow: false,
+            asdf: this.props.itinerary.likes.users,
             itinerary: this.props.itinerary,
             likesTotal: this.props.likesTotal,
             isLikedThisItinerary: [],
@@ -55,6 +56,10 @@ class Itinerary extends Component {
     // }
 
     async componentDidMount(){
+        console.log(this.state.asdf, 'likestotal')
+        var total = this.state.asdf.reduce((previusValue, currentValue) => { return currentValue} , 0)
+        console.log(total, 'total')
+        
         if (localStorage.getItem('token')){
             await this.props.getUserActive(localStorage.getItem('token'))
         }

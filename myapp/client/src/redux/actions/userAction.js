@@ -96,7 +96,7 @@ export const login = data => async dispatch => {
 
 //<---------------------------------- GET USER ACTIVE --------------------------------------->
 export const getUserActive = (token) => async (dispatch) => {
-  
+  console.log(token)
   //cabeceras
   var options = {
     method: 'POST',

@@ -66,45 +66,54 @@ exports.addLike = (req, res) => {
                                     
                                     if(!likeValidate.length){
                                         //si no dio like entonces actualizo los likes del itinerario
-                                        itinerary.updateOne({$inc: {"likes.total" : 1}, $addToSet: {"likes.users" : user._id}}, {new:true}).then(newItinerary =>{
-                                            console.log('newItinerary', newItinerary)
-                                        })
-
-                                        //tambien actualizo los likes del usuario y envio en la respuesta los mismos
-                                        user.updateOne({$addToSet : {likes: {$each : [req.body.itineraryId]}}}).then(result =>{
-                                            if(result.ok){
-    
-                                                userModel.findById({_id: user._id}).then(newUser =>{
-                                                    res.status(200).send({likes: newUser.likes})
+                                        itinerary.updateOne({$addToSet: {"likes.users" : user._id}})
+                                        .then(result => {
+                                            if (result.ok){
+                                                //tambien actualizo los likes del usuario y envio en la respuesta los mismos
+                                                user.updateOne({$addToSet : {likes: {$each : [req.body.itineraryId]}}}, {new: true}).then(result =>{
+                                                    // if(result.ok){
+            
+                                                    //     userModel.findById({_id: user._id}).then(newUser =>{
+                                                    //         res.status(200).send({likes: newUser.likes})
+                                                    //     })
+                                                        
+                                                    // }
+                                                    //console.log(result, 'el nuevo usuario')
+                                                    null
                                                 })
-                                                
                                             }
                                         })
+                                        .catch(error => res.status(500).send({error}))
+
+                                        
+                                        
 
                                     }else{
                                         //en caso de que el usuario ya le haya dado like, entonces no tiro ningun error, simplemente le devuelvo los likes que ya tenía
                                         res.status(500).send({likes: user.likes})
                                     }
 
-                                }else{
+                                }
+                                else{
                                     //en caso de que ningun usuario le haya dado like ( prevenir posible error de undefined con el filter ),
                                     //entonces simplemente actualizo el itinerario
-                                    itinerary.updateOne({$inc: {"likes.total": 1}}).then(newItinerary => {
-                                        if(!newItinerary){
-                                            res.status(500).send('error al actualizar los likes del itinerario')
+                                    itinerary.updateOne({$addToSet: {"likes.users" : user._id}}, {new: true}).then(result => {
+                                        if (result.ok){
+                                            //actualizo el usuario con el nuevo itinerario, y envio los likes del usuario
+                                            user.update({$addToSet : {likes: {$each : [req.body.itineraryId]}}}).then(result =>{
+                                                if(result.ok){
+        
+                                                    userModel.findById({_id: user._id}).then(newUser =>{
+                                                        res.status(200).send({likes: newUser.likes})
+                                                    })
+                                                    
+                                                }
+                                            })
                                         }
                                     }).catch(error => console.log(error))
 
-                                    //actualizo el usuario con el nuevo itinerario, y envio los likes del usuario
-                                    user.update({$addToSet : {likes: {$each : [req.body.itineraryId]}}}).then(result =>{
-                                        if(result.ok){
-
-                                            userModel.findById({_id: user._id}).then(newUser =>{
-                                                res.status(200).send({likes: newUser.likes})
-                                            })
-                                            
-                                        }
-                                    })
+                                    
+                                    
                                 }
                             }
                         })
@@ -167,28 +176,34 @@ exports.deleteLike = (req, res) => {
                         itineraryModel.findById({_id: req.body.itineraryId}).then(itinerary => {
 
                             if (itinerary){
+                                console.log('existe el itinerario')
                                 //si existe el itinerario, pregunto mas especificamente
-                                if (itinerary.likes.users){
+                                if (itinerary.likes.users.length){
                                     //valido si existe el usuario en los likes del itinerario
                                     let likeValidate = itinerary.likes.users.filter(item => (item.toString() == user._id.toString()))
                                     console.log('likeVAlidate', likeValidate)
                                     if (likeValidate.length){
                                         //si el usuario existe en los likes del itinerario, entonces se elimina del itinerario
-                                        itinerary.updateOne({$inc: {"likes.total": -1}, $pull : {"likes.users" : user._id}}).then(newItinerary =>{
-                                            console.log('newItinerary', newItinerary)
+                                        console.log('se actualiza el itinerario')
+
+                                        itinerary.updateOne({$pull : {"likes.users" : user._id}}).then(result =>{
+                                            if (result.ok){
+                                                user.updateOne({$pull : {"likes": req.body.itineraryId}}).then(result =>{
+                                                    if(result.ok){
+        
+                                                        userModel.findById({_id: user._id}).then(newUser =>{
+                                                            res.status(200).send({likes: newUser.likes})
+                                                        })
+        
+                                                    }
+                                                })
+                                            }
                                         }).catch(error => console.log(error))
                                         
                                         //y se actualiza el usuario (eliminando el id del itinerario de sus likes)
-                                        user.updateOne({$pull : {"likes": req.body.itineraryId}}).then(result =>{
-                                            if(result.ok){
-
-                                                userModel.findById({_id: user._id}).then(newUser =>{
-                                                    res.status(200).send({likes: newUser.likes})
-                                                })
-
-                                            }
-                                        })
+                                        
                                     }else {
+                                        console.log('no se quito el like porque el usuario no estaba agregado')
                                         res.status(200).send({likes: user.likes})
                                     }   
                                 }else {

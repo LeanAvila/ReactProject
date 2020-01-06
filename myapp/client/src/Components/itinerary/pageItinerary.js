@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css'
 import './styles.css'
-import Activities from '../activities/pageActivities'
 import { connect } from 'react-redux';
-import { getItinerary} from '../../redux/actions/itineraryAction'
 import { addFavourite, deleteFavourite, getFavourites } from '../../redux/actions/favouriteActions'
 import { addLike, deleteLike, getLikes } from '../../redux/actions/likeActions'
 
 import Itinerary from './itinerary.jsx'
-import Comments from '../comments/commentsPage'
 import {PropTypes} from 'prop-types'
 import { getUserActive } from '../../redux/actions/userAction';
-import NavBar from '../navbar/navbarPage';
 
 class ContentItinerary extends Component {
     constructor (props){
@@ -39,7 +35,6 @@ class ContentItinerary extends Component {
         console.log(this.state.user.user.favourites, 'options')
         return (
             <div >
-                {/* <NavBar location={this.props.location}/> */}
                 {
                     this.state.itinerary?
                         this.state.itinerary.map(item => {
@@ -94,5 +89,5 @@ ContentItinerary.propTypes = {
   })
   
   export default connect(mapStateToProps, { addFavourite, deleteFavourite, getFavourites, 
-                                            addLike, deleteLike, getLikes, getUserActive,
-                                        getItinerary })(ContentItinerary);
+                                            addLike, deleteLike, getLikes, 
+                                            getUserActive })(ContentItinerary);
